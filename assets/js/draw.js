@@ -1,0 +1,107 @@
+// Draw functions
+
+function flashMessage(target, message, type) {
+  var $alertNode = $('<div class="alert alert-' + type +' alert-dismissible fade show" role="alert">' +
+    '<strong>' + message + '</strong>' +
+    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+      '<span aria-hidden="true">&times;</span>' +
+    '</button>' +
+  '</div>');
+  $(target).append($alertNode);
+  $alertNode.alert();
+  setTimeout(() => {
+    $alertNode.alert('close');
+    $alertNode.alert('dispose');
+  }, 1100);
+}
+
+function drawPercentageChange(numerator, denominator) {
+  var percentageChange = ((numerator/denominator * 100) - 100).toFixed(2)
+  var cssClass = 'text-muted';
+  if (percentageChange > 0) {
+    cssClass = 'text-success percentage-up';
+  } else if (percentageChange < 0) {
+    cssClass = 'text-danger percentage-down';
+  }
+  var html = '<span class="percentage-diff-display ' + cssClass + '">&nbsp;' + percentageChange + '%</span>';
+  return html;
+}
+
+function drawTicker(stock) {
+  var html =
+    '<tr class="stock-display-row" data-stock="' + stock.ticker + '" id="stock-row-' + stock.ticker + '">' +
+      '<td class="stock-name">' + stock.name + '</td>' +
+      '<td class="stock-ticker">' + stock.ticker + '</td>' +
+      '<td class="text-right stock-price">' +
+        stock.displayPrice() + ' ' +
+      '</td>' +
+      '<td class="text-right stock-percent-change">' +
+        drawPercentageChange(stock.price, stock.open) +
+      '</td>' +
+      // '<td class="text-right">' + stock.displayOpen() + '</td>' +
+      // '<td class="text-right">' + stock.displayClose() + '</td>' +
+    '</tr>';
+  return html;
+}
+
+function updateTicker(stock, $table) {
+  var $row = $table.find('#stock-row-' + stock.ticker);
+  $row.find('.stock-price').text(stock.displayPrice());
+  $row.find('.stock-percent-change').html(drawPercentageChange(stock.price, stock.open));
+}
+
+function drawLot(order, id) {
+  var stock = stocks[tickerHash[order.stockId]]
+  var html =
+    '<tr>' +
+      '<td>' + stock.ticker + '</td>' +
+      '<td class="text-right">' +
+        stock.displayPrice() + ' ' +
+      '</td>' +
+      '<td class="text-right">' +
+        order.displayPurchasePrice() +
+      '</td>' +
+      '<td class="text-right">' +
+        formatter.format((stock.price * order.numberOfShares) - (order.purchasePrice * order.numberOfShares)) + ' ' +
+        drawPercentageChange(stock.price, order.purchasePrice) +
+      '</td>' +
+      '<td class="text-right">' + order.numberOfShares + '</td>' +
+      '<td class="text-right">' + formatter.format(order.numberOfShares * stock.price) + '</td>' +
+      '<td class="text-right">' +
+        '<button type="button" class="btn btn-primary sell-stock-action" ' +
+          'id="lot-'+ id +'" ' +
+          'data-id="' + order.stockId +'" data-num-of-shares="' + order.numberOfShares + '" data-order-id="' + id + '">' +
+          'Sell Lot '+ id +
+        '</button>' +
+      '</td>' +
+    '</tr>';
+  return html;
+}
+
+function drawMarketView(stocks, id) {
+  var $tableBody = $(id);
+  if ($tableBody.data('drawn')) {
+    return stocks.forEach(function(stock){
+      $tableBody.append(updateTicker(stock, $tableBody));
+    });
+  }
+  $tableBody.html('');
+  stocks.forEach(function(stock){
+    $tableBody.append(drawTicker(stock));
+  });
+  $('.stock-display-row').on('click', selectStockToTrade);
+  $tableBody.data('drawn', true);
+}
+
+function drawPortfolio() {
+  var $tableBody = $('#portfolio-table');
+  $tableBody.html('');
+  for (const [key, value] of Object.entries(portfolio)) {
+    $tableBody.append(drawLot(value, key));
+  };
+  $('#cash-value').text(formatter.format(account.cash));
+  $('#margin-value').text(formatter.format(account.margin));
+  $('#stock-value').text(formatter.format(account.portfolio));
+  $('#total-value').text(formatter.format(account.cash + account.portfolio))
+  $('.sell-stock-action').on('click', sellStockAction);
+}

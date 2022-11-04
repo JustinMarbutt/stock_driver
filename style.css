@@ -1,0 +1,61 @@
+.percentage-down::before {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+.percentage-up::before {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  transform: rotate(180deg) scaleX(-1);
+}
+.percentage-diff-display {
+  white-space: nowrap;
+}
+.stock-picker-button {
+  border: 2px solid #999999;
+  text-align: center;
+  cursor: pointer;
+}
+.stock-picker-button.active {
+  background-color: rgb(36, 36, 154);
+}
+body {
+  /* font-family: 'Lato', sans-serif; */
+  /* font-family: 'Archivo Black', sans-serif; */
+  font-family: 'Questrial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+#is-loading {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.315);
+  text-align: center;
+  padding-top: 48vh;
+}
+#flash-messages {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+  z-index: 1;
+  padding-left: 30vw;
+  padding-right: 30vw;
+}
+
+.account-chart-wrapper {
+  height: 400px;
+}
