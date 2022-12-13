@@ -62,8 +62,3 @@ var account = {
 }
 var time = moment();
 var trends = {};
-
-var stockDriver = createStockDriver();
-var stocks = [];
-var stockIndex = 0;
-var marketsOpen = false;
