@@ -62,3 +62,5 @@ var account = {
 }
 var time = moment();
 var trends = {};
+var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
+var selectedStockIndex = 0;

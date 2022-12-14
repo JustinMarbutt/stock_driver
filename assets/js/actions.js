@@ -99,6 +99,8 @@ function selectStockToTrade() {
   $('#buy-action-ticker').val($(this).data('stock'));
   $('.toggle-trade-view-item').hide();
   $('#trading-view').show();
+  selectedStockIndex = parseInt($(this).data('row-index'));
+  swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
 }
 
 function keySelectStockToTrade(selector) {

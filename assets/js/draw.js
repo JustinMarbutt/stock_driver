@@ -27,9 +27,9 @@ function drawPercentageChange(numerator, denominator) {
   return html;
 }
 
-function drawTicker(stock) {
+function drawTicker(stock, index) {
   var html =
-    '<tr class="stock-display-row" data-stock="' + stock.ticker + '" id="stock-row-' + stock.ticker + '">' +
+    '<tr class="stock-display-row" data-stock="' + stock.ticker + '" data-row-index="' + index + '" id="stock-row-' + stock.ticker + '">' +
       '<td class="stock-name">' + stock.name + '</td>' +
       '<td class="stock-ticker">' + stock.ticker + '</td>' +
       '<td class="text-right stock-price">' +
@@ -99,8 +99,8 @@ function drawMarketView(stocks, id) {
     });
   }
   $tableBody.html('');
-  stocks.forEach(function(stock){
-    $tableBody.append(drawTicker(stock));
+  stocks.forEach(function(stock, i){
+    $tableBody.append(drawTicker(stock, i));
   });
   $('.stock-display-row').on('click', selectStockToTrade);
   $tableBody.data('drawn', true);

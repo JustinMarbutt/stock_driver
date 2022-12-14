@@ -15,16 +15,21 @@ function stockTimer(drawOnTick = true) {
 
   stocks.forEach(function(stock, i) {
     if (bullMarketToday) {
-      return stocks[i].price = upTrendSimple(stock.price);
+      stockDailyValues[i].push(stocks[i].price);
+      stocks[i].price = upTrendSimple(stock.price);
+      return;
     }
     if (bearMarketToday) {
-      return stocks[i].price = downTrendSimple(stock.price);
+      stockDailyValues[i].push(stocks[i].price);
+      stocks[i].price = downTrendSimple(stock.price);
+      return;
     }
     if (trends[i]) {
       stocks[i].price = trends[i].priceFunc(stock.price, gameTime);
     } else {
       stocks[i].price = noTrend(stock.price);
     }
+    stockDailyValues[i].push(stocks[i].price);
   });
 
   var total = 0.00;
@@ -36,7 +41,7 @@ function stockTimer(drawOnTick = true) {
   if(gameTime % 30 == 0 || gameTime === LENGTH_OF_TRADING_DAY_INTERVALS) {
     addData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, drawOnTick);
   }
-  addData(dailyChart, time.format('h:mm a'), stocks[0].price, drawOnTick);
+  addData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, drawOnTick);
 
   if (drawOnTick) {
     drawMarketView(stocks, '#stock-market-table');
@@ -59,6 +64,7 @@ function openMarket() {
   if (gameState) {
     clearInterval(gameState);
   }
+  stockDailyValues = [[],[],[],[],[],[],[],[],[]];
   stocks.forEach(function(stock, i) {
     stocks[i].open = stock.price;
     stocks[i].close = null;
@@ -103,6 +109,8 @@ function closeMarket() {
       }
     }
   });
+
+  console.log(stockDailyValues);
 
   // Enable margin
   // if ((account.cash + account.portfolio > 24999)) {
