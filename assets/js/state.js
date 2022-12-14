@@ -126,6 +126,7 @@ function closeMarket() {
   $('.resume-market').hide();
   $('#open-market').show();
   $('#is-loading').hide();
+  flashMessage('#flash-messages', 'Markets Have Closed!', 'danger');
 }
 
 function pauseMarket() {
