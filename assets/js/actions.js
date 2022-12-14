@@ -11,11 +11,11 @@ function buyStockAction() {
   var newCashValue = account.cash - (stock.price * numberOfShares);
   if ((newCashValue + account.margin) < 0) {
     $('#is-loading').hide();
-    if (rejectAlert.paused) {
-      rejectAlert.play();
-    } else {
-      rejectAlert.currentTime = 0;
-    }
+    // if (rejectAlert.paused) {
+    //   rejectAlert.play();
+    // } else {
+    //   rejectAlert.currentTime = 0;
+    // }
     return flashMessage('#flash-messages', 'Order Rejected!', 'danger');
   }
   if (newCashValue < 0) {
@@ -44,11 +44,11 @@ function buyStockAction() {
   }
 
   flashMessage('#flash-messages', 'Order Accepted!', 'success');
-  if (successDing.paused) {
-    successDing.play();
-  } else {
-    successDing.currentTime = 0;
-  }
+  // if (successDing.paused) {
+  //   successDing.play();
+  // } else {
+  //   successDing.currentTime = 0;
+  // }
 }
 
 function sellStockAction() {
@@ -65,11 +65,11 @@ function sellStockAction() {
   delete portfolio[orderId];
   $('#lot-row-' + id).remove();
   flashMessage('#flash-messages', 'Order Accepted!', 'success');
-  if (successDing.paused) {
-    successDing.play();
-  } else {
-    successDing.currentTime = 0;
-  }
+  // if (successDing.paused) {
+  //   successDing.play();
+  // } else {
+  //   successDing.currentTime = 0;
+  // }
 }
 
 function keySellStockAction(id) {

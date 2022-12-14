@@ -51,9 +51,9 @@ function stockTimer(drawOnTick = true) {
 }
 
 function ringTheBell() {
-  closingBell.play();
-  setTimeout(() => closingBell2.play(), 250);
-  setTimeout(() => closingBell3.play(), 500);
+  // closingBell.play();
+  // setTimeout(() => closingBell2.play(), 250);
+  // setTimeout(() => closingBell3.play(), 500);
 }
 
 function openMarket() {
