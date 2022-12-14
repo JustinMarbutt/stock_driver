@@ -53,20 +53,20 @@ function updateTicker(stock, $table) {
 function drawLot(order, id) {
   var stock = stocks[tickerHash[order.stockId]]
   var html =
-    '<tr>' +
+    '<tr id="lot-row-'+ id +'">' +
       '<td>' + stock.ticker + '</td>' +
-      '<td class="text-right">' +
+      '<td class="text-right lot-price-display">' +
         stock.displayPrice() + ' ' +
       '</td>' +
-      '<td class="text-right">' +
+      '<td class="text-right lot-purchase-display">' +
         order.displayPurchasePrice() +
       '</td>' +
-      '<td class="text-right">' +
+      '<td class="text-right lot-pnl-display">' +
         formatter.format((stock.price * order.numberOfShares) - (order.purchasePrice * order.numberOfShares)) + ' ' +
         drawPercentageChange(stock.price, order.purchasePrice) +
       '</td>' +
-      '<td class="text-right">' + order.numberOfShares + '</td>' +
-      '<td class="text-right">' + formatter.format(order.numberOfShares * stock.price) + '</td>' +
+      '<td class="text-right lot-num-shares-display">' + order.numberOfShares + '</td>' +
+      '<td class="text-right lot-market-value-display">' + formatter.format(order.numberOfShares * stock.price) + '</td>' +
       '<td class="text-right">' +
         '<button type="button" class="btn btn-primary sell-stock-action" ' +
           'id="lot-'+ id +'" ' +
@@ -78,11 +78,24 @@ function drawLot(order, id) {
   return html;
 }
 
+function updateLot(order, id) {
+  var stock = stocks[tickerHash[order.stockId]];
+  var $lotRow = $('#lot-row-' + id);
+  $lotRow.find('.lot-price-display').text(stock.displayPrice());
+  $lotRow.find('.lot-pnl-display').html(
+    formatter.format((stock.price * order.numberOfShares) - (order.purchasePrice * order.numberOfShares)) + ' ' +
+    drawPercentageChange(stock.price, order.purchasePrice)
+  );
+  $lotRow.find('.lot-num-shares-display').text(order.numberOfShares);
+  $lotRow.find('.lot-market-value-display').text(formatter.format(order.numberOfShares * stock.price));
+  $lotRow.find('#lot-' + id).attr('data-num-of-shares', order.numberOfShares);
+}
+
 function drawMarketView(stocks, id) {
   var $tableBody = $(id);
   if ($tableBody.data('drawn')) {
     return stocks.forEach(function(stock){
-      $tableBody.append(updateTicker(stock, $tableBody));
+      updateTicker(stock, $tableBody);
     });
   }
   $tableBody.html('');
@@ -95,13 +108,18 @@ function drawMarketView(stocks, id) {
 
 function drawPortfolio() {
   var $tableBody = $('#portfolio-table');
-  $tableBody.html('');
+  //$tableBody.html('');
   for (const [key, value] of Object.entries(portfolio)) {
-    $tableBody.append(drawLot(value, key));
+    console.log('#lot-row-' + key, $('#lot-row-' + key).length);
+    if ($('#lot-row-' + key).length > 0) {
+      updateLot(value, key);
+    } else {
+      $tableBody.append(drawLot(value, key));
+    }
   };
   $('#cash-value').text(formatter.format(account.cash));
   $('#margin-value').text(formatter.format(account.margin));
   $('#stock-value').text(formatter.format(account.portfolio));
   $('#total-value').text(formatter.format(account.cash + account.portfolio))
-  $('.sell-stock-action').on('click', sellStockAction);
+  $('.sell-stock-action').unbind('click').bind('click', sellStockAction);
 }

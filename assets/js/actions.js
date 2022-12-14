@@ -62,7 +62,8 @@ function sellStockAction() {
   var stock = stocks[tickerHash[id]];
   var newCashValue = account.cash + (stock.price * shares);
   account.cash = newCashValue;
-  delete portfolio[orderId]
+  delete portfolio[orderId];
+  $('#lot-row-' + id).remove();
   flashMessage('#flash-messages', 'Order Accepted!', 'success');
   if (successDing.paused) {
     successDing.play();
@@ -96,6 +97,8 @@ function selectStockToTrade() {
   $('.stock-display-row').removeClass('active');
   $(this).addClass('active');
   $('#buy-action-ticker').val($(this).data('stock'));
+  $('.toggle-trade-view-item').hide();
+  $('#trading-view').show();
 }
 
 function keySelectStockToTrade(selector) {

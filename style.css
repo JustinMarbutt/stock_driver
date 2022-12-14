@@ -59,3 +59,11 @@ body {
 .account-chart-wrapper {
   height: 400px;
 }
+
+.stock-display-row {
+  cursor: pointer;
+}
+
+.stock-display-row:hover, .stock-display-row.active {
+  background-color: rgb(55, 90, 127) !important;
+}
