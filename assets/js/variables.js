@@ -12,11 +12,11 @@ var chanceOfBullMarket = 0.08;
 var chanceOfBearMarket = 0.04;
 var bullMarketToday = false;
 var bearMarketToday = false;
-var closingBell = new Audio('closing_bell.wav');
-var closingBell2 = new Audio('closing_bell.wav');
-var closingBell3 = new Audio('closing_bell.wav');
-var successDing = new Audio('success.wav');
-var rejectAlert = new Audio('rejected.wav');
+var closingBell = new Audio('assets/audio/closing_bell.wav');
+var closingBell2 = new Audio('assets/audio/closing_bell.wav');
+var closingBell3 = new Audio('assets/audio/closing_bell.wav');
+var successDing = new Audio('assets/audio/success.wav');
+var rejectAlert = new Audio('assets/audio/rejected.wav');
 var addedTime = 0;
 var firstWords = [
   'Averley',

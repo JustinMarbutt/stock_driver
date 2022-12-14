@@ -1,0 +1,26 @@
+{
+  "name": "stock_driver",
+  "version": "0.0.1",
+  "description": "stock trading game",
+  "main": "index.js",
+  "scripts": {
+    "build": "css-minify -d assets/styles -o bin/assets/styles && uglifyjs index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js -c -m -o bin/assets/js/library.js && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustinMarbutt/stock_driver.git"
+  },
+  "author": "Justin Marbutt",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/JustinMarbutt/stock_driver/issues"
+  },
+  "homepage": "https://github.com/JustinMarbutt/stock_driver#readme",
+  "devDependencies": {
+    "uglifyjs": "^2.4.11",
+    "uglifyjs-folder": "^3.1.4"
+  },
+  "dependencies": {
+    "css-minify": "^2.0.0"
+  }
+}

@@ -19,7 +19,7 @@ var dailyData = {
   labels: ['9:30 AM'],
   datasets: [{
     label: 'Stock Price',
-    data: [stocks[0].price],
+    data: [],
     borderColor: 'rgba(75, 192, 192, 0.5)',
     borderWidth: 2,
     spanGaps: true,
