@@ -115,7 +115,7 @@
               </table>
             </div>
             <div class="row user-view toggle-trade-view-item" id="trading-view">
-              <div class="form-group col-sm-12 col-md-6">
+              <div class="form-group col-sm-12 col-md-6 col-lg-8">
                 <canvas id="daily-chart" height="400"></canvas>
                 <!-- <h4 class="mt-1">Pick Stock</h4>
                 <div class="row">
@@ -134,17 +134,17 @@
                   <div id="stock-9" class="col-sm-4 p-5 stock-picker-button">NKE</div>
                 </div> -->
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sm-12 col-md-6 col-lg-4">
                 <h4 class="mt-1">Enter Trade</h4>
                 <div class="form-group mb-5">
-                  <label class="form-label mb-1">Buy</label>
+                  <label class="form-label mb-1">Buying ticker: <span class="buy-action-display"></span></label>
+                  <div class="form-group" style="display:none;">
+                    <label class="col-form-label mt-1" for="buy-action-num-shares">Ticker</label>
+                    <input type="text" class="form-control disabled" id="buy-action-ticker" placeholder="Stock Ticker" disabled>
+                  </div>
                   <div class="form-group">
                     <label class="col-form-label mt-1" for="buy-action-num-shares">Number of Shares</label>
                     <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" min="0" max="99999" value="100" class="form-control" placeholder="Number of Shares" id="buy-action-num-shares">
-                  </div>
-                  <div class="form-group">
-                    <label class="col-form-label mt-1" for="buy-action-num-shares">Ticker</label>
-                    <input type="text" class="form-control disabled" id="buy-action-ticker" placeholder="Stock Ticker" disabled>
                   </div>
                   <button class="btn btn-primary mt-2" type="button" id="buy-stock-action" style="float:right;">Buy Lot</button>
                 </div>
