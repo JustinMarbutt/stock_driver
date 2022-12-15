@@ -4,10 +4,12 @@
   "description": "stock trading game",
   "main": "index.js",
   "scripts": {
-    "install-cli": "npm install css-minify -g && npm install uglify-js -g && npm install uglifyjs-folder -g",
+    "setup-cli": "npm install css-minify -g && npm install uglify-js -g && npm install uglifyjs-folder -g",
+    "setup-bin": "cd bin && npm install",
     "build-css": "css-minify -d assets/styles -o bin/assets/styles",
     "build-js": "uglifyjs assets/js/scripts/index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js",
-    "build": "npm run build-js && npm run build-css"
+    "build": "npm run build-js && npm run build-css",
+    "setup": "npm run setup-bin && npm run setup-cli"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,5 @@
   "bugs": {
     "url": "https://github.com/JustinMarbutt/stock_driver/issues"
   },
-  "homepage": "https://github.com/JustinMarbutt/stock_driver#readme",
-  "dependencies": {}
+  "homepage": "https://github.com/JustinMarbutt/stock_driver#readme"
 }
