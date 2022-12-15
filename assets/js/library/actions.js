@@ -72,15 +72,6 @@ function sellStockAction() {
   // }
 }
 
-function onClickCloseMarket() {
-  $('#is-loading').show();
-  pauseMarket();
-  while (gameTime < LENGTH_OF_TRADING_DAY_INTERVALS - 1) {
-    stockTimer(false);
-  }
-  resumeMarket();
-}
-
 function selectStockToTrade() {
   $('.stock-display-row').removeClass('active');
   $(this).addClass('active');
@@ -92,39 +83,33 @@ function selectStockToTrade() {
   swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
 }
 
-function toggleTradeView() {
-  $('.toggle-trade-view-item').hide();
-  $($(this).data('target')).show();
+function onClickCloseMarket() {
+  $('#is-loading').show();
+  pauseMarket();
+  while (gameTime < LENGTH_OF_TRADING_DAY_INTERVALS - 1) {
+    stockTimer(false);
+  }
+  resumeMarket();
 }
 
-function togglePausedMarketView() {
-  $('#pause-market').hide();
-  $('.resume-market').show();
+function onClickPauseMarket() {
+  pauseMarket();
+  togglePausedMarketView();
 }
 
-function toggleResumedMarketView () {
-  $('#pause-market').show();
-  $('#close-market').show();
+function onClickToggleTradeView() {
+  var target = $(this).data('target');
+  toggleTradeView(target);
 }
 
-function toggleClosedMarketView() {
-  $('#pause-market').hide();
-  $('#close-market').hide();
-  $('.resume-market').hide();
-  $('#open-market').show();
-  $('#is-loading').hide();
+function onClickOpenMarket() {
+  openMarket();
+  toggleOpenMarketView();
 }
 
-function toggleOpenMarketView() {
-  $('#open-market').hide();
-  $('#pause-market').show();
-  $('#close-market').show();
-  $('.resume-market').show();
-}
-
-$('#open-market').on('click', openMarket);
+$('#open-market').on('click', onClickOpenMarket);
 $('#close-market').on('click', onClickCloseMarket);
-$('#pause-market').on('click', pauseMarket);
+$('#pause-market').on('click', onClickPauseMarket);
 $('.resume-market').on('click', resumeMarket);
 $('#buy-stock-action').on('click', buyStockAction);
-$('.toggle-trade-view').on('click', toggleTradeView);
+$('.toggle-trade-view').on('click', onClickToggleTradeView);

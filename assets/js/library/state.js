@@ -89,8 +89,6 @@ function openMarket() {
   }
   addedTime = 0;
   gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS); //setting the loop with time interval
-
-  toggleOpenMarketView();
 }
 
 function closeMarket() {
@@ -124,7 +122,6 @@ function closeMarket() {
 
 function pauseMarket() {
   clearInterval(gameState);
-  togglePausedMarketView();
 }
 
 function resumeMarket() {
