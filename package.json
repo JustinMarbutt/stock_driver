@@ -4,12 +4,11 @@
   "description": "stock trading game",
   "main": "bin/index.html",
   "scripts": {
-    "setup-cli": "npm install uglify-js -g && npm install uglifyjs-folder -g",
     "setup-bin": "cd bin && npm install",
     "build-sass": "node-sass assets/styles/ -o bin/assets/styles/",
     "build-js": "uglifyjs assets/js/scripts/index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js",
     "build": "npm run build-js && npm run build-sass",
-    "setup": "npm run setup-bin && npm run setup-cli"
+    "setup": "npm install && npm run setup-bin"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,8 @@
   },
   "homepage": "https://github.com/JustinMarbutt/stock_driver#readme",
   "devDependencies": {
-    "node-sass": "^8.0.0"
+    "node-sass": "^8.0.0",
+    "uglify-js": "^3.17.4",
+    "uglifyjs-folder": "^3.1.4"
   }
 }
