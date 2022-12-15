@@ -123,6 +123,10 @@ function resumeMarket(addedTime) {
 }
 
 function sellStock(stockId, orderId, numOfShares) {
+  if (!marketOpen || marketPaused) {
+    // order rejected (markets not open)
+    return false
+  }
   var stock = stocks[tickerHash[stockId]];
   var newCashValue = account.cash + (stock.price * numOfShares);
   account.cash = newCashValue;
@@ -131,6 +135,10 @@ function sellStock(stockId, orderId, numOfShares) {
 }
 
 function buyStock(ticker, numberOfShares) {
+  if (!marketOpen || marketPaused) {
+    // order rejected (markets not open)
+    return false
+  }
   var stock = stocks[tickerHash[ticker]];
   var newCashValue = account.cash - (stock.price * numberOfShares);
   if ((newCashValue + account.margin) < 0) {

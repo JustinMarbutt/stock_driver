@@ -26,6 +26,8 @@ function onClickBuyStock() {
 function onClickSellStock() {
   if (!marketOpen) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
+  } else if (marketPaused) {
+    return flashMessage('#flash-messages', 'Market Paused!', 'warning');
   }
 
   var id = $(this).data('id');
