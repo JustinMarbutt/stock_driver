@@ -1,4 +1,4 @@
-// Draw functions
+// Draw and toggle functions
 
 function flashMessage(target, message, type) {
   var $alertNode = $('<div class="alert alert-' + type +' alert-dismissible fade show" role="alert">' +
@@ -131,13 +131,14 @@ function drawClosedMarketView() {
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
-function drawSelectStock(stockTicker, selectedStockRow) {
+function drawSelectStock(stockTicker, selectedStockRow, selectedIndex) {
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
   $('#buy-action-ticker').val(stockTicker);
   $('.buy-action-display').text(stockTicker)
   $('.toggle-trade-view-item').hide();
   $('#trading-view').show();
+  swapChartData(dailyChart, stockDailyValues[selectedIndex]);
 }
 
 function togglePausedMarketView() {

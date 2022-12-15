@@ -46,11 +46,10 @@ function onClickSellStock() {
 function onClickStockToTrade() {
   var stockTicker = $(this).data('stock');
   var selectedStockRow = this;
-  // global var
-  selectedStockIndex = parseInt($(this).data('row-index'));
-
-  drawSelectStock(stockTicker, selectedStockRow);
-  swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
+  var selectedIndex = parseInt($(this).data('row-index'));
+  // set global var for state machine refrence
+  selectedStockIndex = selectedIndex;
+  drawSelectStock(stockTicker, selectedStockRow, selectedIndex);
 }
 
 function onClickCloseMarket() {

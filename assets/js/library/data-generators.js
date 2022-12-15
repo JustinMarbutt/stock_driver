@@ -1,4 +1,4 @@
-// Data generators
+// Data generators for company names and stock prices
 
 function makeName() {
   var fistIndex = Math.floor(Math.random()*firstWords.length);

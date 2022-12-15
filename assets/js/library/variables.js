@@ -17,7 +17,7 @@ var closingBell2 = new Audio('assets/audio/closing_bell.wav');
 var closingBell3 = new Audio('assets/audio/closing_bell.wav');
 var successDing = new Audio('assets/audio/success.wav');
 var rejectAlert = new Audio('assets/audio/rejected.wav');
-var addedTime = 0;
+
 var firstWords = [
   'Averley',
   'Brown',
@@ -61,6 +61,7 @@ var account = {
   portfolio: 0.00,
 }
 var time = moment();
+var addedTime = 0;
 var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var selectedStockIndex = 0;
