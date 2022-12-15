@@ -6,7 +6,7 @@
   "scripts": {
     "setup-bin": "cd bin && npm install",
     "build-sass": "node-sass assets/styles/ -o bin/assets/styles/",
-    "build-js": "uglifyjs assets/js/scripts/index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js",
+    "build-js": "uglifyjs assets/js/index.js -c -m -o bin/assets/js/index.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js && uglifyjs-folder assets/js/scripts -c -m -o bin/assets/js/script.js",
     "build": "npm run build-js && npm run build-sass",
     "setup": "npm install && npm run setup-bin"
   },
