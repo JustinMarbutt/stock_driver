@@ -91,6 +91,17 @@ function updateLot(order, id) {
   $lotRow.find('#lot-' + id).attr('data-num-of-shares', order.numberOfShares);
 }
 
+function selectStockToTrade() {
+  $('.stock-display-row').removeClass('active');
+  $(this).addClass('active');
+  $('#buy-action-ticker').val($(this).data('stock'));
+  $('.buy-action-display').text($(this).data('stock'))
+  $('.toggle-trade-view-item').hide();
+  $('#trading-view').show();
+  selectedStockIndex = parseInt($(this).data('row-index'));
+  swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
+}
+
 function drawMarketView(stocks, id) {
   var $tableBody = $(id);
   if ($tableBody.data('drawn')) {
@@ -109,7 +120,6 @@ function drawMarketView(stocks, id) {
 function drawPortfolio() {
   var $tableBody = $('#portfolio-table');
   for (const [key, value] of Object.entries(portfolio)) {
-    console.log('#lot-row-' + key, $('#lot-row-' + key).length);
     if ($('#lot-row-' + key).length > 0) {
       updateLot(value, key);
     } else {
