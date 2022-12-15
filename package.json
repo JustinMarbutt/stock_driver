@@ -4,10 +4,10 @@
   "description": "stock trading game",
   "main": "index.js",
   "scripts": {
-    "prebuild": "npm install css-minify -g && npm install uglify-js -g && npm install uglifyjs-folder -g",
-    "min-css": "css-minify -d assets/styles -o bin/assets/styles",
-    "min-js": "uglifyjs index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js -c -m -o bin/assets/js/library.js",
-    "build": "npm run min-js && npm run min-css"
+    "install-cli": "npm install css-minify -g && npm install uglify-js -g && npm install uglifyjs-folder -g",
+    "build-css": "css-minify -d assets/styles -o bin/assets/styles",
+    "build-js": "uglifyjs assets/js/scripts/index.js -c -m -o bin/assets/js/script.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js",
+    "build": "npm run build-js && npm run build-css"
   },
   "repository": {
     "type": "git",
