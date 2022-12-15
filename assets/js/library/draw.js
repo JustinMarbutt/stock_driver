@@ -91,17 +91,6 @@ function updateLot(order, id) {
   $lotRow.find('#lot-' + id).attr('data-num-of-shares', order.numberOfShares);
 }
 
-function selectStockToTrade() {
-  $('.stock-display-row').removeClass('active');
-  $(this).addClass('active');
-  $('#buy-action-ticker').val($(this).data('stock'));
-  $('.buy-action-display').text($(this).data('stock'))
-  $('.toggle-trade-view-item').hide();
-  $('#trading-view').show();
-  selectedStockIndex = parseInt($(this).data('row-index'));
-  swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
-}
-
 function drawMarketView(stocks, id) {
   var $tableBody = $(id);
   if ($tableBody.data('drawn')) {
@@ -131,29 +120,4 @@ function drawPortfolio() {
   $('#stock-value').text(formatter.format(account.portfolio));
   $('#total-value').text(formatter.format(account.cash + account.portfolio))
   $('.sell-stock-action').unbind('click').bind('click', sellStockAction);
-}
-
-function togglePausedMarketView() {
-  $('#pause-market').hide();
-  $('.resume-market').show();
-}
-
-function toggleResumedMarketView () {
-  $('#pause-market').show();
-  $('#close-market').show();
-}
-
-function toggleClosedMarketView() {
-  $('#pause-market').hide();
-  $('#close-market').hide();
-  $('.resume-market').hide();
-  $('#open-market').show();
-  $('#is-loading').hide();
-}
-
-function toggleOpenMarketView() {
-  $('#open-market').hide();
-  $('#pause-market').show();
-  $('#close-market').show();
-  $('.resume-market').show();
 }
