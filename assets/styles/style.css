@@ -30,13 +30,7 @@
 .stock-picker-button.active {
   background-color: rgb(36, 36, 154);
 }
-body {
-  /* font-family: 'Lato', sans-serif; */
-  /* font-family: 'Archivo Black', sans-serif; */
-  font-family: 'Questrial', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-}
+
 #is-loading {
   position: absolute;
   width: 100vw;
