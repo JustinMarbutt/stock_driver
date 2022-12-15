@@ -49,7 +49,7 @@ function onClickStockToTrade() {
   var selectedIndex = parseInt($(this).data('row-index'));
   // set global var for state machine refrence
   selectedStockIndex = selectedIndex;
-  drawSelectStock(stockTicker, selectedStockRow, selectedIndex);
+  drawSelectedStock(stockTicker, selectedStockRow, selectedIndex);
 }
 
 function onClickCloseMarket() {

@@ -131,7 +131,7 @@ function drawClosedMarketView() {
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
-function drawSelectStock(stockTicker, selectedStockRow, selectedIndex) {
+function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
   $('#buy-action-ticker').val(stockTicker);
