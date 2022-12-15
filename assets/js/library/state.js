@@ -8,7 +8,7 @@ var gameState;
 function marketTick(drawOnTick = true) {
   gameTime++;
   time.add(1, 'minutes');
-  $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
+  drawCurrentTime(time);
   if (gameTime > LENGTH_OF_TRADING_DAY_INTERVALS) {
     closeMarket();
     return drawClosedMarketView();

@@ -186,3 +186,7 @@ function drawOnMarketTicket(stocks) {
   drawPortfolio();
   $('#is-loading').hide();
 }
+
+function drawCurrentTime(time) {
+  $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
+}
