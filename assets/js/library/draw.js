@@ -102,7 +102,7 @@ function drawMarketView(stocks, id) {
   stocks.forEach(function(stock, i){
     $tableBody.append(drawTicker(stock, i));
   });
-  $('.stock-display-row').on('click', selectStockToTrade);
+  $('.stock-display-row').on('click', onClickStockToTrade);
   $tableBody.data('drawn', true);
 }
 
@@ -129,6 +129,15 @@ function drawClosedMarketView() {
 
   toggleClosedMarketView();
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
+}
+
+function drawSelectStock(stockTicker, selectedStockRow) {
+  $('.stock-display-row').removeClass('active');
+  $(selectedStockRow).addClass('active');
+  $('#buy-action-ticker').val(stockTicker);
+  $('.buy-action-display').text(stockTicker)
+  $('.toggle-trade-view-item').hide();
+  $('#trading-view').show();
 }
 
 function togglePausedMarketView() {

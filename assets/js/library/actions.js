@@ -43,14 +43,13 @@ function onClickSellStock() {
   }
 }
 
-function selectStockToTrade() {
-  $('.stock-display-row').removeClass('active');
-  $(this).addClass('active');
-  $('#buy-action-ticker').val($(this).data('stock'));
-  $('.buy-action-display').text($(this).data('stock'))
-  $('.toggle-trade-view-item').hide();
-  $('#trading-view').show();
+function onClickStockToTrade() {
+  var stockTicker = $(this).data('stock');
+  var selectedStockRow = this;
+  // global var
   selectedStockIndex = parseInt($(this).data('row-index'));
+
+  drawSelectStock(stockTicker, selectedStockRow);
   swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
 }
 
