@@ -108,7 +108,6 @@ function drawMarketView(stocks, id) {
 
 function drawPortfolio() {
   var $tableBody = $('#portfolio-table');
-  //$tableBody.html('');
   for (const [key, value] of Object.entries(portfolio)) {
     console.log('#lot-row-' + key, $('#lot-row-' + key).length);
     if ($('#lot-row-' + key).length > 0) {

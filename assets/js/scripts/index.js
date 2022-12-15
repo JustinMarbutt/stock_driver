@@ -25,10 +25,6 @@ function initNewGame() {
     stockIndex++;
   }
 
-  $('input').val('');
-  $('.stock-picker-button').each(function(i) {
-    $(this).text(stocks[i].ticker);
-  });
   $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
   $('#buy-action-num-shares').val(10);
 

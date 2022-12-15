@@ -104,73 +104,9 @@ function selectStockToTrade() {
   swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
 }
 
-function keySelectStockToTrade(selector) {
-  return function() {
-    $('.stock-picker-button').removeClass('active');
-    $(selector).addClass('active');
-    $('#buy-action-ticker').val($(selector).text());
-    $('#sell-action-ticker').val($(selector).text());
-  }
-}
-
 $('#open-market').on('click', openMarket);
 $('#close-market').on('click', onClickCloseMarket);
 $('#pause-market').on('click', pauseMarket);
 $('.resume-market').on('click', resumeMarket);
 $('#buy-stock-action').on('click', buyStockAction);
 $('.toggle-trade-view').on('click', toggleTradeView);
-// $('.stock-picker-button').on('click', selectStockToTrade);
-
-var keyBindingMap = {
-  // ` or ~ Key
-  192: openMarket,
-  // Enter Key
-  13: buyStockAction,
-  // T Key
-  84: toggleTradeView,
-  // Q Key
-  81: keySelectStockToTrade('#stock-1'),
-  // W Key
-  87: keySelectStockToTrade('#stock-2'),
-  // E Key
-  69: keySelectStockToTrade('#stock-3'),
-  // A Key
-  65: keySelectStockToTrade('#stock-4'),
-  // S Key
-  83: keySelectStockToTrade('#stock-5'),
-  // D Key
-  68: keySelectStockToTrade('#stock-6'),
-  // Z Key
-  90: keySelectStockToTrade('#stock-7'),
-  // X Key
-  88: keySelectStockToTrade('#stock-8'),
-  // C Key
-  67: keySelectStockToTrade('#stock-9'),
-  // U Key
-  85: keySellStockAction('#lot-0'),
-  // I Key
-  73: keySellStockAction('#lot-1'),
-  // O Key
-  79: keySellStockAction('#lot-2'),
-  // J Key
-  74: keySellStockAction('#lot-3'),
-  // K Key
-  75: keySellStockAction('#lot-4'),
-  // L Key
-  76: keySellStockAction('#lot-5'),
-  // M Key
-  76: keySellStockAction('#lot-6'),
-  // , or < Key
-  188: keySellStockAction('#lot-7'),
-  // . or > Key
-  190: keySellStockAction('#lot-8'),
-}
-
-// $(document).ready(function(){
-//   $(document).bind("keydown", function(e){ 
-//       e = e || window.event;
-//       var charCode = e.which || e.keyCode;
-//       console.log(charCode)
-//       if(keyBindingMap[charCode]) keyBindingMap[charCode]();
-//   });
-// });
