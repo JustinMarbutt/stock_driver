@@ -2,7 +2,7 @@
   "name": "stock_driver",
   "version": "0.0.1",
   "description": "stock trading game",
-  "main": "index.js",
+  "main": "bin/index.html",
   "scripts": {
     "setup-cli": "npm install css-minify -g && npm install uglify-js -g && npm install uglifyjs-folder -g",
     "setup-bin": "cd bin && npm install",
