@@ -122,3 +122,28 @@ function drawPortfolio() {
   $('#total-value').text(formatter.format(account.cash + account.portfolio))
   $('.sell-stock-action').unbind('click').bind('click', sellStockAction);
 }
+
+function togglePausedMarketView() {
+  $('#pause-market').hide();
+  $('.resume-market').show();
+}
+
+function toggleResumedMarketView () {
+  $('#pause-market').show();
+  $('#close-market').show();
+}
+
+function toggleClosedMarketView() {
+  $('#pause-market').hide();
+  $('#close-market').hide();
+  $('.resume-market').hide();
+  $('#open-market').show();
+  $('#is-loading').hide();
+}
+
+function toggleOpenMarketView() {
+  $('#open-market').hide();
+  $('#pause-market').show();
+  $('#close-market').show();
+  $('.resume-market').show();
+}

@@ -89,11 +89,8 @@ function openMarket() {
   }
   addedTime = 0;
   gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS); //setting the loop with time interval
-  // TODO: Extract to toggleOpenMarketView
-  $('#open-market').hide();
-  $('#pause-market').show();
-  $('#close-market').show();
-  $('.resume-market').show();
+
+  toggleOpenMarketView();
 }
 
 function closeMarket() {
@@ -111,8 +108,6 @@ function closeMarket() {
     }
   });
 
-  console.log(stockDailyValues);
-
   // Enable margin
   // if ((account.cash + account.portfolio > 24999)) {
   //   account.margin = 25000;
@@ -122,28 +117,21 @@ function closeMarket() {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
   ringTheBell();
-  // TODO: Extract to toggleClosedMarketView
-  $('#pause-market').hide();
-  $('#close-market').hide();
-  $('.resume-market').hide();
-  $('#open-market').show();
-  $('#is-loading').hide();
+
+  toggleClosedMarketView();
   flashMessage('#flash-messages', 'Markets Have Closed!', 'danger');
 }
 
 function pauseMarket() {
   clearInterval(gameState);
-  // TODO: Extract to togglePausedMarketView
-  $('#pause-market').hide();
-  $('.resume-market').show();
+  togglePausedMarketView();
 }
 
 function resumeMarket() {
   clearInterval(gameState);
   addedTime = parseInt($(this).data('ms'));
-  gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS + addedTime); //setting the loop with time interval
-  // $('.resume-market').hide();
-  // TODO: Extract to toggleResumedMarketView
-  $('#pause-market').show();
-  $('#close-market').show();
+  //setting the loop with time interval
+  gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS + addedTime);
+
+  toggleResumedMarketView();
 }
