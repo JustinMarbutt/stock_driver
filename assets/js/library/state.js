@@ -89,6 +89,7 @@ function openMarket() {
   }
   addedTime = 0;
   gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS); //setting the loop with time interval
+  // TODO: Extract to toggleOpenMarketView
   $('#open-market').hide();
   $('#pause-market').show();
   $('#close-market').show();
@@ -121,6 +122,7 @@ function closeMarket() {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
   ringTheBell();
+  // TODO: Extract to toggleClosedMarketView
   $('#pause-market').hide();
   $('#close-market').hide();
   $('.resume-market').hide();
@@ -131,6 +133,7 @@ function closeMarket() {
 
 function pauseMarket() {
   clearInterval(gameState);
+  // TODO: Extract to togglePausedMarketView
   $('#pause-market').hide();
   $('.resume-market').show();
 }
@@ -140,6 +143,7 @@ function resumeMarket() {
   addedTime = parseInt($(this).data('ms'));
   gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS + addedTime); //setting the loop with time interval
   // $('.resume-market').hide();
+  // TODO: Extract to toggleResumedMarketView
   $('#pause-market').show();
   $('#close-market').show();
 }

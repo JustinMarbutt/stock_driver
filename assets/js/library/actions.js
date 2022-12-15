@@ -72,13 +72,6 @@ function sellStockAction() {
   // }
 }
 
-function keySellStockAction(id) {
-  return function() {
-    console.log($(id));
-    sellStockAction.call($(id));
-  }
-}
-
 function onClickCloseMarket() {
   $('#is-loading').show();
   pauseMarket();
