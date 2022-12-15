@@ -3,6 +3,8 @@
 function onClickBuyStock() {
   if (!marketOpen) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
+  } else if (marketPaused) {
+    return flashMessage('#flash-messages', 'Market Paused!', 'warning');
   }
 
   var ticker = $('#buy-action-ticker').val();

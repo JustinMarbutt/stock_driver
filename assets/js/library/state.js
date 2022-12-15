@@ -54,6 +54,7 @@ function openMarket() {
     return;
   }
   marketOpen = true;
+  marketPaused = false;
   bearMarketToday = false;
   bullMarketToday = false;
   if (gameState) {
@@ -87,6 +88,7 @@ function openMarket() {
 
 function closeMarket() {
   marketOpen = false;
+  marketPaused = false;
   gameTime = 0;
   gameDays++;
   stocks.forEach(function(stock, i) {
@@ -109,6 +111,7 @@ function closeMarket() {
 }
 
 function pauseMarket() {
+  marketPaused = true;
   clearInterval(gameState);
 }
 
@@ -116,6 +119,7 @@ function resumeMarket(addedTime) {
   clearInterval(gameState);
   //setting the loop with time interval
   gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS + addedTime);
+  marketPaused = false;
 }
 
 function sellStock(stockId, orderId, numOfShares) {
