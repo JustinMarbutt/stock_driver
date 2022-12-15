@@ -1,6 +1,6 @@
 // Chart.js manipulation wrappers
 
-function addData(chart, label, data, draw) {
+function addChartData(chart, label, data, draw) {
   chart.data.labels.push(label);
   chart.data.datasets.forEach((dataset) => {
     dataset.data.push(data);

@@ -40,14 +40,12 @@ function stockTimer(drawOnTick = true) {
   account.portfolio = total;
 
   if(gameTime % 30 == 0 || gameTime === LENGTH_OF_TRADING_DAY_INTERVALS) {
-    addData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, drawOnTick);
+    addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, drawOnTick);
   }
-  addData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, drawOnTick);
+  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, drawOnTick);
 
   if (drawOnTick) {
-    drawMarketView(stocks, '#stock-market-table');
-    drawPortfolio();
-    $('#is-loading').hide();
+    drawOnMarketTicket(stocks);
   }
 }
 

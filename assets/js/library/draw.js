@@ -176,3 +176,13 @@ function toggleResumedMarketView() {
 function removeStockFromPortfolioView(id) {
   $('#lot-row-' + id).remove();
 }
+
+function drawSeedValue(seed) {
+  $('#seed-result').text(seed);
+}
+
+function drawOnMarketTicket(stocks) {
+  drawMarketView(stocks, '#stock-market-table');
+  drawPortfolio();
+  $('#is-loading').hide();
+}

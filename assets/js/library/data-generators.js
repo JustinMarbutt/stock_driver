@@ -42,8 +42,9 @@ function makeCompany(rng, min, max) {
 
 function createStockDriver() {
   var seed = getRandomArbitrary(0, 1000);
-  $('#seed-result').text(seed);
   var rng = defineSeededRandom(seed);
+
+  drawSeedValue(seed);
 
   return {
     createStock: function(min, max) {
