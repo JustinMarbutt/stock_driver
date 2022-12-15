@@ -37,6 +37,7 @@ function initNewGame() {
 
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
+  $('#stock-market-table').find('tr').first().trigger('click');
 }
 
-initNewGame();
+$(document).ready(initNewGame);
