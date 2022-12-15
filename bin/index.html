@@ -13,10 +13,9 @@
     <!-- STYLES -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/styles/darkstrap.css">
     <link rel="stylesheet" href="assets/styles/style.css">
   </head>
-  <body class="dark">
+  <body class="bg-dark">
     <div id="is-loading" style="display:none;">
       <div class="spinner-border text-info" role="status">
       </div>
@@ -33,14 +32,14 @@
             <div class="mb-2 d-flex justify-content-between">
               <div>
                 <button type="button" class="btn btn-success mx-1" id="open-market" style="float:left;">Open Market</button>
-                <button type="button" class="btn btn-warning mx-1" id="pause-market" style="display:none;float:left;"><i class="bi bi-pause-fill"></i></button>
+                <button type="button" class="btn text-white btn-warning mx-1" id="pause-market" style="display:none;float:left;"><i class="bi bi-pause-fill"></i></button>
                 <button type="button" class="btn btn-primary mx-1 resume-market" data-ms="0" style="display:none;float:left;"><i class="bi bi-play-fill"></i></button>
                 <button type="button" class="btn btn-primary mx-1 resume-market" data-ms="-800" style="display:none;float:left;"><i class="bi bi-fast-forward-fill"></i></button>
                 <button type="button" class="btn btn-danger mx-1" id="close-market" style="display:none;float:left;"><i class="bi bi-skip-forward-fill"></i></button>
               </div>
               <h4><span id="time-display"></span></h4>
             </div>
-            <table class="table table-hover">
+            <table class="table table-dark">
               <thead>
                 <tr>
                   <th scope="col">Company Name</th>
@@ -89,7 +88,7 @@
               </div>
             </div>
             <div class="toggle-trade-view-item" id="portfolio-view" style="display:none;">
-              <table class="table table-hover user-view">
+              <table class="table table-dark table-hover user-view">
                 <thead>
                   <tr>
                     <th scope="col">Ticker</th>
