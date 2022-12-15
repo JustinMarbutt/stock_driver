@@ -1,11 +1,5 @@
-// Global vars
 var stockDriver = createStockDriver();
-var stocks = [];
-var stockIndex = 0;
-var marketsOpen = false;
 
-
-// Init new game
 function initNewGame() {
   for (var i = 0; i < 3; i++) {
     var newStock = stockDriver.createStock(50, 420);
