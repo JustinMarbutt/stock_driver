@@ -114,11 +114,53 @@ function pauseMarket() {
   clearInterval(gameState);
 }
 
-function resumeMarket() {
+function resumeMarket(addedTime) {
   clearInterval(gameState);
-  addedTime = parseInt($(this).data('ms'));
   //setting the loop with time interval
   gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS + addedTime);
+}
 
-  toggleResumedMarketView();
+function sellStock(stockId, orderId, numOfShares) {
+  var stock = stocks[tickerHash[stockId]];
+  var newCashValue = account.cash + (stock.price * numOfShares);
+  account.cash = newCashValue;
+  delete portfolio[orderId];
+  return true;
+}
+
+function buyStock(ticker, numberOfShares) {
+  var stock = stocks[tickerHash[ticker]];
+  var newCashValue = account.cash - (stock.price * numberOfShares);
+  if ((newCashValue + account.margin) < 0) {
+    // order rejected (not enough cash)
+    return false;
+  }
+  if (newCashValue < 0) {
+    account.cash = 0;
+    account.margin = account.margin + newCashValue;
+  } else {
+    account.cash = newCashValue;
+  }
+
+  // if the position already exists in portfolio add to it
+  if (portfolio[ticker]) {
+    var position = portfolio[ticker];
+    position.purchasePrice = (
+      (parseFloat(position.purchasePrice) * parseFloat(position.numberOfShares)) +
+      (parseFloat(stock.price) * parseFloat(numberOfShares))
+    ) / (parseFloat(numberOfShares) + parseFloat(position.numberOfShares))  
+    position.numberOfShares = parseFloat(position.numberOfShares) + parseFloat(numberOfShares);
+  } else {
+    portfolio[ticker] = {
+      stockId: ticker,
+      purchasePrice: stock.price,
+      numberOfShares: numberOfShares,
+      displayPurchasePrice: function() {
+        return formatter.format(this.purchasePrice);
+      },
+    };
+  }
+
+  // order accepted
+  return true;
 }

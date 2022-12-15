@@ -58,3 +58,19 @@ function ringTheBell() {
   // setTimeout(() => closingBell2.play(), 250);
   // setTimeout(() => closingBell3.play(), 500);
 }
+
+function playSuccessSound() {
+  if (successDing.paused) {
+    successDing.play();
+  } else {
+    successDing.currentTime = 0;
+  }
+}
+
+function playRejectSound() {
+  if (rejectAlert.paused) {
+    rejectAlert.play();
+  } else {
+    rejectAlert.currentTime = 0;
+  }
+}

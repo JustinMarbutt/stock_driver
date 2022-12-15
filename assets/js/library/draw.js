@@ -119,7 +119,7 @@ function drawPortfolio() {
   $('#margin-value').text(formatter.format(account.margin));
   $('#stock-value').text(formatter.format(account.portfolio));
   $('#total-value').text(formatter.format(account.cash + account.portfolio))
-  $('.sell-stock-action').unbind('click').bind('click', sellStockAction);
+  $('.sell-stock-action').unbind('click').bind('click', onClickSellStock);
 }
 
 function drawClosedMarketView() {
@@ -161,4 +161,8 @@ function toggleOpenMarketView() {
 function toggleResumedMarketView() {
   $('#pause-market').show();
   $('#close-market').show();
+}
+
+function removeStockFromPortfolioView(id) {
+  $('#lot-row-' + id).remove();
 }

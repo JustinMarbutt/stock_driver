@@ -1,75 +1,46 @@
 // Binding functions to dom
 
-function buyStockAction() {
+function onClickBuyStock() {
   if (!marketOpen) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
   }
-  $('#is-loading').show();
+
   var ticker = $('#buy-action-ticker').val();
   var numberOfShares = $('#buy-action-num-shares').val();
-  var stock = stocks[tickerHash[ticker]];
-  var newCashValue = account.cash - (stock.price * numberOfShares);
-  if ((newCashValue + account.margin) < 0) {
+
+  $('#is-loading').show();
+  var orderRes = buyStock(ticker, numberOfShares);
+  $('#is-loading').hide();
+  if (orderRes) {
+    playSuccessSound();
+    flashMessage('#flash-messages', 'Order Accepted!', 'success');
+  } else {
     $('#is-loading').hide();
-    // if (rejectAlert.paused) {
-    //   rejectAlert.play();
-    // } else {
-    //   rejectAlert.currentTime = 0;
-    // }
+    playRejectSound();
     return flashMessage('#flash-messages', 'Order Rejected!', 'danger');
   }
-  if (newCashValue < 0) {
-    account.cash = 0;
-    account.margin = account.margin + newCashValue;
-  } else {
-    account.cash = newCashValue;
-  }
-
-  if (portfolio[ticker]){
-    var position = portfolio[ticker];
-    position.purchasePrice = (
-      (parseFloat(position.purchasePrice) * parseFloat(position.numberOfShares)) +
-      (parseFloat(stock.price) * parseFloat(numberOfShares))
-    ) / (parseFloat(numberOfShares) + parseFloat(position.numberOfShares))  
-    position.numberOfShares = parseFloat(position.numberOfShares) + parseFloat(numberOfShares);
-  } else {
-    portfolio[ticker] = {
-      stockId: ticker,
-      purchasePrice: stock.price,
-      numberOfShares: numberOfShares,
-      displayPurchasePrice: function() {
-        return formatter.format(this.purchasePrice);
-      },
-    };
-  }
-
-  flashMessage('#flash-messages', 'Order Accepted!', 'success');
-  // if (successDing.paused) {
-  //   successDing.play();
-  // } else {
-  //   successDing.currentTime = 0;
-  // }
 }
 
-function sellStockAction() {
+function onClickSellStock() {
   if (!marketOpen) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
   }
-  $('#is-loading').show();
+
   var id = $(this).data('id');
   var orderId = $(this).data('order-id')
   var shares = parseInt($(this).data('numOfShares'));
-  var stock = stocks[tickerHash[id]];
-  var newCashValue = account.cash + (stock.price * shares);
-  account.cash = newCashValue;
-  delete portfolio[orderId];
-  $('#lot-row-' + id).remove();
-  flashMessage('#flash-messages', 'Order Accepted!', 'success');
-  // if (successDing.paused) {
-  //   successDing.play();
-  // } else {
-  //   successDing.currentTime = 0;
-  // }
+
+  $('#is-loading').show();
+  var orderRes = sellStock(id, orderId, shares);
+  $('#is-loading').hide();
+  if (orderRes) {
+    removeStockFromPortfolioView(id);
+    playSuccessSound();
+    flashMessage('#flash-messages', 'Order Accepted!', 'success');
+  } else {
+    playRejectSound();
+    flashMessage('#flash-messages', 'Order Rejected!', 'danger');
+  }
 }
 
 function selectStockToTrade() {
@@ -89,7 +60,7 @@ function onClickCloseMarket() {
   while (gameTime < LENGTH_OF_TRADING_DAY_INTERVALS - 1) {
     stockTimer(false);
   }
-  resumeMarket();
+  resumeMarket(-800);
 }
 
 function onClickPauseMarket() {
@@ -107,9 +78,15 @@ function onClickOpenMarket() {
   toggleOpenMarketView();
 }
 
+function onClickResumeMarket() {
+  addedTime = $(this).data('ms');
+  resumeMarket(addedTime);
+  toggleResumedMarketView();
+}
+
+$('#buy-stock-action').on('click', onClickBuyStock);
 $('#open-market').on('click', onClickOpenMarket);
 $('#close-market').on('click', onClickCloseMarket);
 $('#pause-market').on('click', onClickPauseMarket);
-$('.resume-market').on('click', resumeMarket);
-$('#buy-stock-action').on('click', buyStockAction);
+$('.resume-market').on('click', onClickResumeMarket);
 $('.toggle-trade-view').on('click', onClickToggleTradeView);
