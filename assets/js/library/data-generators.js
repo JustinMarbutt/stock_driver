@@ -40,7 +40,7 @@ function makeCompany(rng, min, max) {
   }
 }
 
-function createStockDriver() {
+function createFakeMarket() {
   var seed = getRandomArbitrary(0, 1000);
   var rng = defineSeededRandom(seed);
 

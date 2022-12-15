@@ -1,10 +1,10 @@
-var stockDriver = createStockDriver();
+var fakeMarket = createFakeMarket();
 
 // Default funciton for creating a new game
 function initNewGame() {
   // create 3 unique teir 0 stocks with high prices and low vol
   for (var i = 0; i < 3; i++) {
-    var newStock = stockDriver.createStock(50, 420);
+    var newStock = fakeMarket.createStock(50, 420);
     newStock['tier'] = 0;
     stocks.push(newStock);
     tickerHash[newStock.ticker] = stockIndex;
@@ -13,7 +13,7 @@ function initNewGame() {
 
   // create 3 unique tier 1 stocks with medium prices and vol
   for (var i = 0; i < 3; i++) {
-    var newStock = stockDriver.createStock(12, 75);
+    var newStock = fakeMarket.createStock(12, 75);
     newStock['tier'] = 1;
     stocks.push(newStock);
     tickerHash[newStock.ticker] = stockIndex;
@@ -22,7 +22,7 @@ function initNewGame() {
 
   // create 3 unique tier 2 stocks with low price and high vol
   for (var i = 0; i < 3; i++) {
-    var newStock = stockDriver.createStock(0, 10);
+    var newStock = fakeMarket.createStock(0, 10);
     newStock['tier'] = 2;
     stocks.push(newStock);
     tickerHash[newStock.ticker] = stockIndex;

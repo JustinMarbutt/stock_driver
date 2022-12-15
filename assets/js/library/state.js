@@ -5,7 +5,7 @@ var gameDays = 0;
 var marketOpen = false;
 var gameState;
 
-function stockTimer(drawOnTick = true) {
+function marketTick(drawOnTick = true) {
   gameTime++;
   time.add(1, 'minutes');
   $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
@@ -82,7 +82,7 @@ function openMarket() {
     chanceOfBearMarket += 0.01
   }
   addedTime = 0;
-  gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS); //setting the loop with time interval
+  gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS); //setting the loop with time interval
 }
 
 function closeMarket() {
@@ -115,7 +115,7 @@ function pauseMarket() {
 function resumeMarket(addedTime) {
   clearInterval(gameState);
   //setting the loop with time interval
-  gameState = setInterval(stockTimer, STATE_INTERVAL_IN_MS + addedTime);
+  gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS + addedTime);
 }
 
 function sellStock(stockId, orderId, numOfShares) {
