@@ -10,7 +10,8 @@ function stockTimer(drawOnTick = true) {
   time.add(1, 'minutes');
   $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
   if (gameTime > LENGTH_OF_TRADING_DAY_INTERVALS) {
-    return closeMarket();
+    closeMarket();
+    return drawClosedMarketView();
   }
 
   stocks.forEach(function(stock, i) {
@@ -50,14 +51,10 @@ function stockTimer(drawOnTick = true) {
   }
 }
 
-function ringTheBell() {
-  // closingBell.play();
-  // setTimeout(() => closingBell2.play(), 250);
-  // setTimeout(() => closingBell3.play(), 500);
-}
-
 function openMarket() {
-  if (marketOpen) return onClickCloseMarket();
+  if (marketOpen) {
+    return;
+  }
   marketOpen = true;
   bearMarketToday = false;
   bullMarketToday = false;
@@ -69,8 +66,7 @@ function openMarket() {
     stocks[i].open = stock.price;
     stocks[i].close = null;
   });
-  clearChartData(dailyChart);
-  ringTheBell();
+
   time.set('hour', 9);
   time.set('minute', 30);
   if (time.format('dddd') === 'Friday') {
@@ -112,12 +108,6 @@ function closeMarket() {
   // }
 
   clearInterval(gameState);
-  drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
-  ringTheBell();
-
-  toggleClosedMarketView();
-  flashMessage('#flash-messages', 'Markets Have Closed!', 'danger');
 }
 
 function pauseMarket() {

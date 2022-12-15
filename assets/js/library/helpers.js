@@ -52,3 +52,9 @@ function basicTick(price, chanceOfNoChange, minGainChance, maxGainChance, minTic
   }
   return newPrice;
 }
+
+function ringTheBell() {
+  // closingBell.play();
+  // setTimeout(() => closingBell2.play(), 250);
+  // setTimeout(() => closingBell3.play(), 500);
+}

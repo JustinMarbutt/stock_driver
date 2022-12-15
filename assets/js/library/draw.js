@@ -122,6 +122,15 @@ function drawPortfolio() {
   $('.sell-stock-action').unbind('click').bind('click', sellStockAction);
 }
 
+function drawClosedMarketView() {
+  drawMarketView(stocks, '#stock-market-table');
+  drawPortfolio();
+  ringTheBell();
+
+  toggleClosedMarketView();
+  flashMessage('#flash-messages', 'Markets Closed', 'danger');
+}
+
 function togglePausedMarketView() {
   $('#pause-market').hide();
   $('.resume-market').show();
@@ -141,13 +150,15 @@ function toggleClosedMarketView() {
 }
 
 function toggleOpenMarketView() {
+  clearChartData(dailyChart);
   $('#open-market').hide();
   $('#pause-market').show();
   $('#close-market').show();
   $('.resume-market').show();
+  ringTheBell();
 }
 
-function toggleResumedMarketView () {
+function toggleResumedMarketView() {
   $('#pause-market').show();
   $('#close-market').show();
 }
