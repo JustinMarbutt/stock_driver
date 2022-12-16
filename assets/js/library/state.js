@@ -45,7 +45,7 @@ function marketTick(drawOnTick = true) {
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, drawOnTick);
 
   if (drawOnTick) {
-    drawOnMarketTicket(stocks);
+    drawOnMarketTick(stocks);
   }
 }
 

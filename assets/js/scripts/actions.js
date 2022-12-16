@@ -12,7 +12,9 @@ function onClickBuyStock() {
 
   $('#is-loading').show();
   var orderRes = buyStock(ticker, numberOfShares);
-  $('#is-loading').hide();
+  // Let state clear loading for now
+  // to prevent more than one order per tick
+  // $('#is-loading').hide();
   if (orderRes) {
     playSuccessSound();
     flashMessage('#flash-messages', 'Order Accepted!', 'success');
@@ -36,7 +38,9 @@ function onClickSellStock() {
 
   $('#is-loading').show();
   var orderRes = sellStock(id, orderId, shares);
-  $('#is-loading').hide();
+  // Let state clear loading for now
+  // to prevent more than one order per tick
+  // $('#is-loading').hide();
   if (orderRes) {
     removeStockFromPortfolioView(id);
     playSuccessSound();

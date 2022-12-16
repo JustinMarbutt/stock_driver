@@ -71,7 +71,7 @@ function drawLot(order, id) {
         '<button type="button" class="btn btn-primary sell-stock-action" ' +
           'id="lot-'+ id +'" ' +
           'data-id="' + order.stockId +'" data-num-of-shares="' + order.numberOfShares + '" data-order-id="' + id + '">' +
-          'Sell Lot '+ id +
+          'Sell '+ id +
         '</button>' +
       '</td>' +
     '</tr>';
@@ -106,9 +106,37 @@ function drawMarketView(stocks, id) {
   $tableBody.data('drawn', true);
 }
 
+function drawPositionTradeView(position) {
+  var stock = stocks[tickerHash[position.stockId]];
+  var $selectedStockPosition = $('#selected-stock-position');
+  var $sellButton = $selectedStockPosition.find('.sell-stock-action');
+  $selectedStockPosition.find('.current-position-info-display').html(
+    '<strong>Current Position</strong><br>' +
+    'Shares: ' + position.numberOfShares + '<br>' +
+    'Market Value: ' + formatter.format(parseInt(position.numberOfShares) * stock.price) + '<br>' +
+    'Profit/Loss: ' + formatter.format((stock.price * position.numberOfShares) - (position.purchasePrice * position.numberOfShares)) + ' ' +
+        drawPercentageChange(stock.price, position.purchasePrice) + '<br>'
+  );
+  // update sell button (not re-draw) so its always clickable
+  $sellButton.attr('id', 'trade-sell-lot-'+ stock.ticker);
+  $sellButton.data('id', stock.ticker);
+  $sellButton.data('num-of-shares', position.numberOfShares);
+  $sellButton.data('order-id', stock.ticker);
+  $sellButton.text('Sell ' + stock.ticker);
+  $('.sell-stock-action').unbind('click');
+  $('.sell-stock-action').on('click', onClickSellStock);
+}
+
 function drawPortfolio() {
+  var selectedStock = stocks[selectedStockIndex];
   var $tableBody = $('#portfolio-table');
+  var $selectedStockPosition = $('#selected-stock-position');
+  $selectedStockPosition.hide();
   for (const [key, value] of Object.entries(portfolio)) {
+    if (selectedStock.ticker === key) {
+      $selectedStockPosition.show();
+      drawPositionTradeView(value);
+    }
     if ($('#lot-row-' + key).length > 0) {
       updateLot(value, key);
     } else {
@@ -122,16 +150,13 @@ function drawPortfolio() {
   $('.sell-stock-action').unbind('click').bind('click', onClickSellStock);
 }
 
-function drawClosedMarketView() {
-  drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
-  ringTheBell();
-
-  toggleClosedMarketView();
-  flashMessage('#flash-messages', 'Markets Closed', 'danger');
-}
-
 function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
+  var $selectedStockPosition = $('#selected-stock-position');
+  $selectedStockPosition.hide();
+  if (portfolio[stockTicker]) {
+    $selectedStockPosition.show();
+    drawPositionTradeView(portfolio[stockTicker]);
+  }
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
   $('#buy-action-ticker').val(stockTicker);
@@ -139,6 +164,15 @@ function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
   $('.toggle-trade-view-item').hide();
   $('#trading-view').show();
   swapChartData(dailyChart, stockDailyValues[selectedIndex]);
+}
+
+function drawClosedMarketView() {
+  drawMarketView(stocks, '#stock-market-table');
+  drawPortfolio();
+  ringTheBell();
+
+  toggleClosedMarketView();
+  flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
 function togglePausedMarketView() {
@@ -181,7 +215,7 @@ function drawSeedValue(seed) {
   $('#seed-result').text(seed);
 }
 
-function drawOnMarketTicket(stocks) {
+function drawOnMarketTick(stocks) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
   $('#is-loading').hide();

@@ -110,7 +110,7 @@
               </div>
               <div class="col-sm-12 col-md-6 col-lg-4">
                 <h4 class="mt-1">Enter Trade</h4>
-                <div class="form-group mb-5">
+                <form>
                   <label class="form-label mb-1">Buying ticker: <span class="buy-action-display"></span></label>
                   <div class="form-group" style="display:none;">
                     <label class="col-form-label mt-1" for="buy-action-num-shares">Ticker</label>
@@ -119,20 +119,24 @@
                   <div class="form-group">
                     <label class="col-form-label mt-1" for="buy-action-num-shares">Number of Shares</label>
                     <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" min="0" max="99999" value="100" class="form-control" placeholder="Number of Shares" id="buy-action-num-shares">
+                    <button class="btn btn-primary mt-2" type="button" id="buy-stock-action">Buy Lot</button>
                   </div>
-                  <button class="btn btn-primary mt-2" type="button" id="buy-stock-action" style="float:right;">Buy Lot</button>
-                </div>
-                <div class="form-group" style="display:none;">
-                  <label class="form-label mb-1">Sell Short</label>
-                  <div class="form-group">
-                    <label class="col-form-label mt-1" for="sell-action-num-shares">Number of Shares</label>
-                    <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" min="0" max="99999" class="form-control" placeholder="Number of Shares" id="sell-action-num-shares">
-                  </div>
-                  <div class="form-group">
-                    <label class="col-form-label mt-1" for="sell-action-num-shares">Ticker</label>
-                    <input type="text" class="form-control" id="sell-action-ticker" placeholder="Stock Ticker" disabled>
-                  </div>
-                  <button class="btn btn-primary mt-2" type="button" id="sell-stock-action" style="float:right;">Sell Lot Short</button>
+                  <!-- <div class="form-group" style="display:none;">
+                    <label class="form-label mb-1">Sell Short</label>
+                    <div class="form-group">
+                      <label class="col-form-label mt-1" for="sell-action-num-shares">Number of Shares</label>
+                      <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" min="0" max="99999" class="form-control" placeholder="Number of Shares" id="sell-action-num-shares">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label mt-1" for="sell-action-num-shares">Ticker</label>
+                      <input type="text" class="form-control" id="sell-action-ticker" placeholder="Stock Ticker" disabled>
+                    </div>
+                    <button class="btn btn-primary mt-2" type="button" id="sell-stock-action" style="float:right;">Sell Lot Short</button>
+                  </div> -->
+                </form>
+                <div id="selected-stock-position" style="display:none;">
+                  <div class="current-position-info-display"></div>
+                  <button type="button" class="btn btn-primary sell-stock-action">Sell</button>
                 </div>
               </div>
             </div>
