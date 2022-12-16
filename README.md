@@ -1,4 +1,4 @@
-# stock_driver
+# StockDriver
 
 An engine and interface for a fake market trading game.
 
