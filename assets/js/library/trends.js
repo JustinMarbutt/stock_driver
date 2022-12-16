@@ -1,5 +1,22 @@
 // Trend Functions
 
+function basicTick(price, chanceOfNoChange, minGainChance, maxGainChance, minTickChange, maxTickChange) {
+  var rand = Math.random();
+  if (rand < chanceOfNoChange) {
+    return price;
+  }
+  rand = Math.random();
+  var newPrice;
+  var percentageLoss = getRandomArbitrary(minGainChance, maxGainChance);
+  var percentChange = getRandomArbitrary(minTickChange, maxTickChange);
+  if (rand > percentageLoss) {
+    newPrice = price - (price * percentChange);
+  } else {
+    newPrice = price + (price * percentChange);
+  }
+  return newPrice;
+}
+
 function noTrend(price) {
   return basicTick(
     price,

@@ -1,5 +1,14 @@
 // Data generators for company names and stock prices
 
+function getFirstLetters(str) {
+  const firstLetters = str
+    .split(' ')
+    .map(word => word[0])
+    .join('');
+
+  return firstLetters;
+}
+
 function makeName() {
   var fistIndex = Math.floor(Math.random()*firstWords.length);
   var secondIndex = Math.floor(Math.random()*secondWords.length);
