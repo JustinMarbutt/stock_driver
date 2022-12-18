@@ -2,6 +2,8 @@
 
 // require drawClosedMarketView from ../scripts/draw.js
 // require drawOnMarketTick from ../scripts/draw.js
+var drawClosedMarket = function() {};
+var drawOnTick = function(a) {return a};
 
 var gameTime = 0;
 var gameDays = 0;
