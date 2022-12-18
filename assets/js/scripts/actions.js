@@ -12,7 +12,7 @@ function onClickBuyStock() {
 
   $('#is-loading').show();
   var orderRes = buyStock(ticker, numberOfShares);
-  // Let state clear loading for now
+  // Let drawOnMarketTick clear loading for now
   // to prevent more than one order per tick
   // $('#is-loading').hide();
   if (orderRes) {
@@ -38,7 +38,7 @@ function onClickSellStock() {
 
   $('#is-loading').show();
   var orderRes = sellStock(id, orderId, shares);
-  // Let state clear loading for now
+  // Let drawOnMarketTick clear loading for now
   // to prevent more than one order per tick
   // $('#is-loading').hide();
   if (orderRes) {
