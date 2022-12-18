@@ -8,7 +8,8 @@
     "build-sass": "node-sass assets/styles/ -o bin/assets/styles/",
     "build-js": "uglifyjs assets/js/index.js -c -m -o bin/assets/js/index.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js && uglifyjs-folder assets/js/scripts -c -m -o bin/assets/js/script.js",
     "build": "npm run build-js && npm run build-sass",
-    "setup": "npm install && npm run setup-bin"
+    "setup": "npm install && npm run setup-bin",
+    "build-dev": "npm run build && open bin/index.html"
   },
   "repository": {
     "type": "git",
