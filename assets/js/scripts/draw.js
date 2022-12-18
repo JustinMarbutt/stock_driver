@@ -110,6 +110,7 @@ function drawPositionTradeView(position) {
   var stock = stocks[tickerHash[position.stockId]];
   var $selectedStockPosition = $('#selected-stock-position');
   var $sellButton = $selectedStockPosition.find('.sell-stock-action');
+  // re-draw position info
   $selectedStockPosition.find('.current-position-info-display').html(
     '<strong>Current Position</strong><br>' +
     'Shares: ' + position.numberOfShares + '<br>' +
