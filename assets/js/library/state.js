@@ -1,7 +1,6 @@
 // State machine
 
 // require drawClosedMarketView from ../scripts/draw.js
-// require drawCurrentTime from ../scripts/draw.js
 // require drawOnMarketTick from ../scripts/draw.js
 
 var gameTime = 0;
@@ -12,7 +11,6 @@ var gameState;
 function marketTick(drawOnTick = true) {
   gameTime++;
   time.add(1, 'minutes');
-  drawCurrentTime(time);
   if (gameTime > LENGTH_OF_TRADING_DAY_INTERVALS) {
     closeMarket();
     return drawClosedMarketView();

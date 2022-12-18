@@ -218,6 +218,7 @@ function drawSeedValue(seed) {
 function drawOnMarketTick(stocks) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
+  drawCurrentTime(time);
   $('#is-loading').hide();
 }
 
