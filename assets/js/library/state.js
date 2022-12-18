@@ -1,5 +1,9 @@
 // State machine
 
+// require drawClosedMarketView from ../scripts/draw.js
+// require drawCurrentTime from ../scripts/draw.js
+// require drawOnMarketTick from ../scripts/draw.js
+
 var gameTime = 0;
 var gameDays = 0;
 var marketOpen = false;
