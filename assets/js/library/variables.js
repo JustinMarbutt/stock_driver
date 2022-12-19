@@ -61,7 +61,6 @@ var account = {
   portfolio: 0.00,
 }
 
-var addedTime = 0;
 var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var selectedStockIndex = 0;
