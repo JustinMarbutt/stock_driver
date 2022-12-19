@@ -8,6 +8,7 @@ var drawOnTick = function(a) {return a};
 var gameTime = 0;
 var gameDays = 0;
 var marketOpen = false;
+var marketPaused = false;
 var gameState;
 
 function marketTick(drawOnTick = true) {
