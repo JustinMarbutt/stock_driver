@@ -5,6 +5,11 @@
 var drawClosedMarket = function() {};
 var drawOnTick = function(a) {return a};
 
+var chanceOfBullMarket = 0.08;
+var chanceOfBearMarket = 0.04;
+var bullMarketToday = false;
+var bearMarketToday = false;
+
 var time = moment();
 var gameTime = 0;
 var gameDays = 0;

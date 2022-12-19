@@ -1,5 +1,40 @@
 // Data generators for company names and stock prices
 
+var firstWords = [
+  'Averley',
+  'Brown',
+  'Cooks',
+  'Denver',
+  'Electronic',
+  'Fabio',
+  'Greyrock',
+  'Hemmet',
+  'Mark\'s',
+  'New Haven',
+  'Tip Top',
+  'Good Vibes',
+  'Reno',
+  'Cybernine',
+  'Blockchain',
+  'Wolf'
+];
+var secondWords = [
+  'Accounting',
+  'Bank',
+  'Computers',
+  'Dynamics',
+  'Engineering',
+  'Financial',
+  'Global',
+  'Hotels',
+  'International',
+  'Sciences',
+  'Capital Fund',
+  'Airlines',
+  'Retail Stores',
+  'World Wide'
+];
+
 function getFirstLetters(str) {
   const firstLetters = str
     .split(' ')

@@ -2,6 +2,7 @@ var fakeMarket = createFakeMarket();
 
 // Default funciton for creating a new game
 function initNewGame() {
+  var stockIndex = 0;
   // create 3 unique teir 0 stocks with high prices and low vol
   for (var i = 0; i < 3; i++) {
     var newStock = fakeMarket.createStock(50, 420);

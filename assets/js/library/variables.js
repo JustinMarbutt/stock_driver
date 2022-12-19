@@ -8,50 +8,11 @@ const MAX_TICK_CHANGE = .00027;
 const CHANCE_OF_NO_CHANGE = .125;
 
 // Variables
-var chanceOfBullMarket = 0.08;
-var chanceOfBearMarket = 0.04;
-var bullMarketToday = false;
-var bearMarketToday = false;
 var closingBell = new Audio('assets/audio/closing_bell.wav');
 var closingBell2 = new Audio('assets/audio/closing_bell.wav');
 var closingBell3 = new Audio('assets/audio/closing_bell.wav');
 var successDing = new Audio('assets/audio/success.wav');
 var rejectAlert = new Audio('assets/audio/rejected.wav');
-
-var firstWords = [
-  'Averley',
-  'Brown',
-  'Cooks',
-  'Denver',
-  'Electronic',
-  'Fabio',
-  'Greyrock',
-  'Hemmet',
-  'Mark\'s',
-  'New Haven',
-  'Tip Top',
-  'Good Vibes',
-  'Reno',
-  'Cybernine',
-  'Blockchain',
-  'Wolf'
-];
-var secondWords = [
-  'Accounting',
-  'Bank',
-  'Computers',
-  'Dynamics',
-  'Engineering',
-  'Financial',
-  'Global',
-  'Hotels',
-  'International',
-  'Sciences',
-  'Capital Fund',
-  'Airlines',
-  'Retail Stores',
-  'World Wide'
-];
 
 var tickerHash = {};
 var portfolio = {}//Array(9);
@@ -65,7 +26,6 @@ var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var selectedStockIndex = 0;
 var stocks = [];
-var stockIndex = 0;
 
 // Init Charts
 var accountChartData = {
