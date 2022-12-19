@@ -34,7 +34,7 @@ function initNewGame() {
   time.set('minute', 30);
   time.set('month', 3);
   time.set('day', 8);
-  time.set('year', 2021);
+  time.set('year', 1987);
   $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
   $('#buy-action-num-shares').val(10);
 
