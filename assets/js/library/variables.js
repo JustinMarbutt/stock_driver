@@ -60,7 +60,7 @@ var account = {
   margin: 0.00,
   portfolio: 0.00,
 }
-var time = moment();
+
 var addedTime = 0;
 var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];

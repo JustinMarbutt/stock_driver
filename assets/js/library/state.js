@@ -5,6 +5,7 @@
 var drawClosedMarket = function() {};
 var drawOnTick = function(a) {return a};
 
+var time = moment();
 var gameTime = 0;
 var gameDays = 0;
 var marketOpen = false;
