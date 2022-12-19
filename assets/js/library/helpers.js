@@ -34,17 +34,17 @@ function ringTheBell() {
 }
 
 function playSuccessSound() {
-  if (successDing.paused) {
-    successDing.play();
-  } else {
-    successDing.currentTime = 0;
-  }
+  // if (successDing.paused) {
+  //   successDing.play();
+  // } else {
+  //   successDing.currentTime = 0;
+  // }
 }
 
 function playRejectSound() {
-  if (rejectAlert.paused) {
-    rejectAlert.play();
-  } else {
-    rejectAlert.currentTime = 0;
-  }
+  // if (rejectAlert.paused) {
+  //   rejectAlert.play();
+  // } else {
+  //   rejectAlert.currentTime = 0;
+  // }
 }
