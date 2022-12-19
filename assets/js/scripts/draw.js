@@ -9,7 +9,7 @@ function flashMessage(target, message, type) {
   '</div>');
   $(target).append($alertNode);
   $alertNode.alert();
-  setTimeout(() => {
+  setTimeout(function() {
     $alertNode.alert('close');
     $alertNode.alert('dispose');
   }, 1100);
