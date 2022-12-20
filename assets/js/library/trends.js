@@ -1,5 +1,11 @@
 // Trend Functions
 
+const MIN_CHANCE_OF_GAIN = .025;
+const MAX_CHANCE_OF_GAIN = 1;
+const MIN_TICK_CHANGE = .00005;
+const MAX_TICK_CHANGE = .00027;
+const CHANCE_OF_NO_CHANGE = .125;
+
 function basicTick(price, chanceOfNoChange, minGainChance, maxGainChance, minTickChange, maxTickChange) {
   var rand = Math.random();
   if (rand < chanceOfNoChange) {

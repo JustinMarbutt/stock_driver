@@ -27,6 +27,13 @@ var formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
 });
 
+// Sound Helpers
+var closingBell = new Audio('assets/audio/closing_bell.wav');
+var closingBell2 = new Audio('assets/audio/closing_bell.wav');
+var closingBell3 = new Audio('assets/audio/closing_bell.wav');
+var successDing = new Audio('assets/audio/success.wav');
+var rejectAlert = new Audio('assets/audio/rejected.wav');
+
 function ringTheBell() {
   // closingBell.play();
   // setTimeout(() => closingBell2.play(), 250);
