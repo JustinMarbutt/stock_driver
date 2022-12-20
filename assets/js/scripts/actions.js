@@ -62,11 +62,7 @@ function onClickStockToTrade() {
 
 function onClickCloseMarket() {
   $('#is-loading').show();
-  pauseMarket();
-  while (gameTime < LENGTH_OF_TRADING_DAY_INTERVALS - 1) {
-    marketTick(false);
-  }
-  resumeMarket(-800);
+  skipToMarketClose();
 }
 
 function onClickPauseMarket() {

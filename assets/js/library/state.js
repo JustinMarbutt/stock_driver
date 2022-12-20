@@ -122,6 +122,14 @@ function pauseMarket() {
   clearInterval(gameState);
 }
 
+function skipToMarketClose() {
+  pauseMarket();
+  while (gameTime < LENGTH_OF_TRADING_DAY_INTERVALS - 1) {
+    marketTick(false);
+  }
+  resumeMarket(-800);
+}
+
 function resumeMarket(addedTime) {
   clearInterval(gameState);
   //setting the loop with time interval
