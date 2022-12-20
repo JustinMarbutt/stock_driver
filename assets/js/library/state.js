@@ -51,6 +51,7 @@ function marketTick(drawOnTick = true) {
   };
   account.portfolio = total;
 
+  // TODO: Extract to drawOnMarketTick
   if(gameTime % 30 == 0 || gameTime === LENGTH_OF_TRADING_DAY_INTERVALS) {
     addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, drawOnTick);
   }
