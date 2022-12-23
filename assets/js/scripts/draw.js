@@ -166,8 +166,7 @@ function updateTicker(stock, $table) {
   $row.find('.stock-percent-change').html(drawPercentageChange(stock.price, stock.open));
 }
 
-function drawLot(order, id) {
-  var stock = stocks[tickerHash[order.stockId]]
+function drawLot(order, id, stock) {
   var html =
     '<tr id="lot-row-'+ id +'">' +
       '<td>' + stock.ticker + '</td>' +
@@ -194,8 +193,7 @@ function drawLot(order, id) {
   return html;
 }
 
-function updateLot(order, id) {
-  var stock = stocks[tickerHash[order.stockId]];
+function updateLot(order, id, stock) {
   var $lotRow = $('#lot-row-' + id);
   $lotRow.find('.lot-price-display').text(stock.displayPrice());
   $lotRow.find('.lot-pnl-display').html(
@@ -222,7 +220,7 @@ function drawMarketView(stocks, id) {
   $tableBody.data('drawn', true);
 }
 
-function drawPositionTradeView(position) {
+function drawPositionTradeView(stocks, position) {
   var stock = stocks[tickerHash[position.stockId]];
   var $selectedStockPosition = $('#selected-stock-position');
   var $sellButton = $selectedStockPosition.find('.sell-stock-action');
@@ -252,12 +250,12 @@ function drawPortfolio() {
   for (const [key, value] of Object.entries(portfolio)) {
     if (selectedStock.ticker === key) {
       $selectedStockPosition.show();
-      drawPositionTradeView(value);
+      drawPositionTradeView(stocks, value);
     }
     if ($('#lot-row-' + key).length > 0) {
-      updateLot(value, key);
+      updateLot(value, key, stocks[tickerHash[value.stockId]]);
     } else {
-      $tableBody.append(drawLot(value, key));
+      $tableBody.append(drawLot(value, key, stocks[tickerHash[value.stockId]]));
     }
   };
   $('#cash-value').text(formatter.format(account.cash));
@@ -272,7 +270,7 @@ function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
   $selectedStockPosition.hide();
   if (portfolio[stockTicker]) {
     $selectedStockPosition.show();
-    drawPositionTradeView(portfolio[stockTicker]);
+    drawPositionTradeView(stocks, portfolio[stockTicker]);
   }
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
