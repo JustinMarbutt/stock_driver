@@ -44,7 +44,7 @@ function initNewGame() {
 
   // draw the market and portfolio
   drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
+  drawPortfolio(stocks, portfolio, account);
 
   // select the first stock to trade by default
   $('#stock-market-table').find('tr').first().trigger('click');

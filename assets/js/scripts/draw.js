@@ -242,7 +242,7 @@ function drawPositionTradeView(stocks, position) {
   $('.sell-stock-action').on('click', onClickSellStock);
 }
 
-function drawPortfolio() {
+function drawPortfolio(stocks, portfolio, account) {
   var selectedStock = stocks[selectedStockIndex];
   var $tableBody = $('#portfolio-table');
   var $selectedStockPosition = $('#selected-stock-position');
@@ -281,18 +281,18 @@ function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
   swapChartData(dailyChart, stockDailyValues[selectedIndex]);
 }
 
-function drawClosedMarketView() {
+function drawClosedMarketView(stocks, portfolio, account) {
   drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
+  drawPortfolio(stocks, portfolio, account);
   ringTheBell();
 
   toggleClosedMarketView();
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
-function drawOnMarketTick(stocks, account) {
+function drawOnMarketTick(stocks, portfolio, account) {
   drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
+  drawPortfolio(stocks, portfolio, account);
   drawCurrentTime(time);
   addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);

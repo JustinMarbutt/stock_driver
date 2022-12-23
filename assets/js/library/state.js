@@ -7,9 +7,9 @@ const CHANCE_OF_BEAR_MARKET = 0.04;
 // require drawClosedMarketView from ../scripts/draw.js
 // require drawOnMarketTick from ../scripts/draw.js
 // require renderMarketTick from ../scripts/draw.js
-var drawClosedMarket = function() {};
-var drawOnTick = function(a) {return a};
-var renderMarektTick = function(a) {return a};
+var drawClosedMarket = function(a, b, c) {return a || b || c};
+var drawOnTick = function(a, b, c) {return a || b || c};
+var renderMarektTick = function(a, b, c) {return a || b || c};
 
 var bullMarketToday = false;
 var bearMarketToday = false;
@@ -26,7 +26,7 @@ function marketTick(drawOnTick = true) {
   time.add(1, 'minutes');
   if (gameTime > LENGTH_OF_TRADING_DAY_INTERVALS) {
     closeMarket();
-    return drawClosedMarketView();
+    return drawClosedMarketView(stocks, portfolio, account);
   }
 
   stocks.forEach(function(stock, i) {
@@ -55,9 +55,9 @@ function marketTick(drawOnTick = true) {
   account.portfolio = stockTotalValue;
 
   if (drawOnTick) {
-    drawOnMarketTick(stocks, account);
+    drawOnMarketTick(stocks, portfolio, account);
   } else {
-    renderMarektTick(stocks, account);
+    renderMarektTick(stocks, portfolio, account);
   }
 }
 
