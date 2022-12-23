@@ -166,31 +166,12 @@ var trendFuncs = [
 ]
 
 function setTrendsForWeek() {
-  trends = {};
+  var randTrends = {};
   for(var i = 0; i < 7; i++) {
-    trends[i] = {
+    randTrends[i] = {
       priceFunc: trendFuncs[Math.round(getRandomArbitrary(0,13))],
       daysLeft: Math.round(getRandomArbitrary(0,4)),
     }
   }
-}
-
-function setBearTrendsForWeek() {
-  trends = {};
-  for(var i = 0; i < 7; i++) {
-    trends[i] = {
-      priceFunc: trendFuncs[Math.round(getRandomArbitrary(0,14))],
-      daysLeft: Math.round(getRandomArbitrary(0,5)),
-    }
-  }
-}
-
-function setBullTendsForWeek() {
-  trends = {};
-  for(var i = 0; i < 7; i++) {
-    trends[i] = {
-      priceFunc: trendFuncs[Math.round(getRandomArbitrary(0,14))],
-      daysLeft: Math.round(getRandomArbitrary(0,5)),
-    }
-  }
+  return randTrends;
 }
