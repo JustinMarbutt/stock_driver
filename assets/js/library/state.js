@@ -54,6 +54,7 @@ function marketTick(drawOnTick = true) {
   if (drawOnTick) {
     drawOnMarketTick(stocks);
   }
+  // TODO: add callback for chart labels and possibly other logic when drawOnTick = false
 }
 
 function openMarket() {

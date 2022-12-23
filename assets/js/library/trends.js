@@ -167,7 +167,7 @@ var trendFuncs = [
 
 function setTrendsForWeek() {
   var randTrends = {};
-  for(var i = 0; i < 7; i++) {
+  for(var i = 0; i < 8; i++) {
     randTrends[i] = {
       priceFunc: trendFuncs[Math.round(getRandomArbitrary(0,13))],
       daysLeft: Math.round(getRandomArbitrary(0,4)),
