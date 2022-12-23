@@ -7,7 +7,7 @@ const CHANCE_OF_BEAR_MARKET = 0.04;
 var drawClosedMarket = function(a, b, c) {return a || b || c};
 var drawOnTick = function(a, b, c, d) {return a || b || c || d};
 var saveMarketTick = function(a, b) {return a || b};
-var drawOffMarketTick = function(a, b, c) {return a || b || c};
+var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
 
 var bullMarketToday = false;
 var bearMarketToday = false;
@@ -60,7 +60,7 @@ function marketTick(drawOnTick = true) {
 }
 
 function broadcastState() {
-  drawOffMarketTick(stocks, portfolio, account);
+  drawOffMarketTick(stocks, portfolio, account, stockDailyValues);
 }
 
 function openMarket() {

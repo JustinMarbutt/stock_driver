@@ -293,7 +293,7 @@ function drawOnMarketTick(stocks, portfolio, account, time) {
   $('#is-loading').hide();
 }
 
-function drawOffMarketTick(stocks, portfolio, account) {
+function drawOffMarketTick(stocks, portfolio, account, stockDailyValues) {
   drawPortfolio(stocks, portfolio, account);
   swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
 }
