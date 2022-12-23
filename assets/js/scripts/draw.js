@@ -290,7 +290,7 @@ function drawClosedMarketView(stocks, portfolio, account) {
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
-function drawOnMarketTick(stocks, portfolio, account) {
+function drawOnMarketTick(stocks, portfolio, account, time) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio(stocks, portfolio, account);
   drawCurrentTime(time);
