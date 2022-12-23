@@ -1,14 +1,14 @@
 // Variables
-var tickerHash = {};
-var portfolio = {}//Array(9);
+// TODO: extract from index.js to default state creation
+var stocks = [];
+var portfolio = {};
 var account = {
   cash: 24500.00,
   margin: 0.00,
   portfolio: 0.00,
 }
-
 var trends = {};
-var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
+
+// Global action/draw vars
 var selectedStockIndex = 0;
-var stocks = [];
-var time = moment();
+var tickerHash = {};

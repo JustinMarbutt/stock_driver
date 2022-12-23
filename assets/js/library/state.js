@@ -4,14 +4,17 @@ const STATE_INTERVAL_IN_MS = 1000;
 const CHANCE_OF_BULL_MARKET = 0.08;
 const CHANCE_OF_BEAR_MARKET = 0.04;
 
-var drawClosedMarket = function(a, b, c) {return a || b || c};
 var drawOnTick = function(a, b, c, d) {return a || b || c || d};
-var saveMarketTick = function(a, b) {return a || b};
 var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
+var saveMarketTick = function(a, b) {return a || b};
+var drawClosedMarket = function(a, b, c) {return a || b || c};
+
+var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 
 var bullMarketToday = false;
 var bearMarketToday = false;
 
+var time = moment();
 var gameTime = 0;
 var gameDays = 0;
 var addedTime = 0;
