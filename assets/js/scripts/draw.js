@@ -265,15 +265,7 @@ function drawPortfolio(stocks, portfolio, account) {
   $('.sell-stock-action').unbind('click').bind('click', onClickSellStock);
 }
 
-function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
-  // var $selectedStockPosition = $('#selected-stock-position');
-  // $selectedStockPosition.hide();
-  // if (portfolio[stockTicker]) {
-  //   $selectedStockPosition.show();
-  //   drawPositionTradeView(stocks, portfolio[stockTicker]);
-  // }
-  // swapChartData(dailyChart, stockDailyValues[selectedIndex]);
-  // END TODO
+function drawSelectedStock(stockTicker, selectedStockRow) {
   broadcastState();
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
@@ -296,7 +288,6 @@ function drawOnMarketTick(stocks, portfolio, account, time) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio(stocks, portfolio, account);
   drawCurrentTime(time);
-  // swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
   addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);
   $('#is-loading').hide();
