@@ -1,18 +1,19 @@
 // State machine
 const LENGTH_OF_TRADING_DAY_INTERVALS = 389;
 const STATE_INTERVAL_IN_MS = 1000;
+const CHANCE_OF_BULL_MARKET = 0.08;
+const CHANCE_OF_BEAR_MARKET = 0.04;
 
 // require drawClosedMarketView from ../scripts/draw.js
 // require drawOnMarketTick from ../scripts/draw.js
+// require renderMarketTick from ../scripts/draw.js
 var drawClosedMarket = function() {};
 var drawOnTick = function(a) {return a};
+var renderMarektTick = function(a) {return a};
 
-var chanceOfBullMarket = 0.08;
-var chanceOfBearMarket = 0.04;
 var bullMarketToday = false;
 var bearMarketToday = false;
 
-var time = moment();
 var gameTime = 0;
 var gameDays = 0;
 var addedTime = 0;
@@ -86,12 +87,10 @@ function openMarket() {
   time.add(1, 'days');
   var rand = Math.random();
   var rand2 = Math.random();
-  if (rand < chanceOfBullMarket) {
+  if (rand < CHANCE_OF_BULL_MARKET) {
     bullMarketToday = true;
-    chanceOfBullMarket += 0.01
-  } else if (rand2 < chanceOfBearMarket) {
+  } else if (rand2 < CHANCE_OF_BEAR_MARKET) {
     bearMarketToday = true;
-    chanceOfBearMarket += 0.01
   }
   addedTime = 0;
   gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS); //setting the loop with time interval

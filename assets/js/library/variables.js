@@ -11,3 +11,4 @@ var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var selectedStockIndex = 0;
 var stocks = [];
+var time = moment();

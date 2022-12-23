@@ -292,6 +292,24 @@ function drawClosedMarketView() {
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
+function drawOnMarketTick(stocks) {
+  drawMarketView(stocks, '#stock-market-table');
+  drawPortfolio();
+  drawCurrentTime(time);
+  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
+  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);
+  $('#is-loading').hide();
+}
+
+function renderMarektTick(stocks) {
+  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, false);
+  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, false);
+}
+
+function drawCurrentTime(time) {
+  $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
+}
+
 function togglePausedMarketView() {
   $('#pause-market').hide();
   $('.resume-market').show();
@@ -330,22 +348,4 @@ function removeStockFromPortfolioView(id) {
 
 function drawSeedValue(seed) {
   $('#seed-result').text(seed);
-}
-
-function drawOnMarketTick(stocks) {
-  drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio();
-  drawCurrentTime(time);
-  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
-  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);
-  $('#is-loading').hide();
-}
-
-function renderMarektTick(stocks) {
-  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, false);
-  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, false);
-}
-
-function drawCurrentTime(time) {
-  $('#time-display').text(time.format('dddd MMMM Do, h:mm a'));
 }
