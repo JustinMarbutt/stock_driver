@@ -266,19 +266,22 @@ function drawPortfolio(stocks, portfolio, account) {
 }
 
 function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
-  // var $selectedStockPosition = $('#selected-stock-position');
-  // $selectedStockPosition.hide();
-  // if (portfolio[stockTicker]) {
-  //   $selectedStockPosition.show();
-  //   drawPositionTradeView(stocks, portfolio[stockTicker]);
-  // }
+  // TODO: Move code to drawPositionTradeView ?
+  var $selectedStockPosition = $('#selected-stock-position');
+  $selectedStockPosition.hide();
+  if (portfolio[stockTicker]) {
+    $selectedStockPosition.show();
+    drawPositionTradeView(stocks, portfolio[stockTicker]);
+  }
+  swapChartData(dailyChart, stockDailyValues[selectedIndex]);
+  // END TODO
+
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
   $('#buy-action-ticker').val(stockTicker);
   $('.buy-action-display').text(stockTicker)
   $('.toggle-trade-view-item').hide();
   $('#trading-view').show();
-  swapChartData(dailyChart, stockDailyValues[selectedIndex]);
 }
 
 function drawClosedMarketView(stocks, portfolio, account) {
