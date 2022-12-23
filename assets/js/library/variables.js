@@ -1,7 +1,3 @@
-// Constants
-const LENGTH_OF_TRADING_DAY_INTERVALS = 389;
-const STATE_INTERVAL_IN_MS = 1000;
-
 // Variables
 var tickerHash = {};
 var portfolio = {}//Array(9);
