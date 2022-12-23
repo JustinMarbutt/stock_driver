@@ -336,9 +336,14 @@ function drawOnMarketTick(stocks) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
   drawCurrentTime(time);
-  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, drawOnTick);
-  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, drawOnTick);
+  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
+  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);
   $('#is-loading').hide();
+}
+
+function renderMarektTick(stocks) {
+  addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, false);
+  addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, false);
 }
 
 function drawCurrentTime(time) {
