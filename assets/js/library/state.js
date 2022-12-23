@@ -45,11 +45,11 @@ function marketTick(drawOnTick = true) {
     stockDailyValues[i].push(stocks[i].price);
   });
 
-  var total = 0.00;
+  var stockTotalValue = 0.00;
   for (const [key, value] of Object.entries(portfolio)) {
-    total += stocks[tickerHash[key]].price * value.numberOfShares;
+    stockTotalValue += stocks[tickerHash[key]].price * value.numberOfShares;
   };
-  account.portfolio = total;
+  account.portfolio = stockTotalValue;
 
   if (drawOnTick) {
     drawOnMarketTick(stocks);
