@@ -266,16 +266,15 @@ function drawPortfolio(stocks, portfolio, account) {
 }
 
 function drawSelectedStock(stockTicker, selectedStockRow, selectedIndex) {
-  // TODO: Move code to drawPositionTradeView ?
-  var $selectedStockPosition = $('#selected-stock-position');
-  $selectedStockPosition.hide();
-  if (portfolio[stockTicker]) {
-    $selectedStockPosition.show();
-    drawPositionTradeView(stocks, portfolio[stockTicker]);
-  }
-  swapChartData(dailyChart, stockDailyValues[selectedIndex]);
+  // var $selectedStockPosition = $('#selected-stock-position');
+  // $selectedStockPosition.hide();
+  // if (portfolio[stockTicker]) {
+  //   $selectedStockPosition.show();
+  //   drawPositionTradeView(stocks, portfolio[stockTicker]);
+  // }
+  // swapChartData(dailyChart, stockDailyValues[selectedIndex]);
   // END TODO
-
+  broadcastState();
   $('.stock-display-row').removeClass('active');
   $(selectedStockRow).addClass('active');
   $('#buy-action-ticker').val(stockTicker);
@@ -297,12 +296,18 @@ function drawOnMarketTick(stocks, portfolio, account, time) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio(stocks, portfolio, account);
   drawCurrentTime(time);
+  // swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
   addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, true);
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, true);
   $('#is-loading').hide();
 }
 
-function renderMarektTick(stocks, account) {
+function drawOffMarketTick(stocks, portfolio, account) {
+  drawPortfolio(stocks, portfolio, account);
+  swapChartData(dailyChart, stockDailyValues[selectedStockIndex]);
+}
+
+function saveMarketTick(stocks, portfolio, account, time) {
   addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, false);
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, false);
 }

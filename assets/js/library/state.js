@@ -4,12 +4,10 @@ const STATE_INTERVAL_IN_MS = 1000;
 const CHANCE_OF_BULL_MARKET = 0.08;
 const CHANCE_OF_BEAR_MARKET = 0.04;
 
-// require drawClosedMarketView from ../scripts/draw.js
-// require drawOnMarketTick from ../scripts/draw.js
-// require renderMarketTick from ../scripts/draw.js
 var drawClosedMarket = function(a, b, c) {return a || b || c};
-var drawOnTick = function(a, b, c) {return a || b || c};
-var renderMarektTick = function(a, b, c) {return a || b || c};
+var drawOnTick = function(a, b, c, d) {return a || b || c || d};
+var saveMarketTick = function(a, b) {return a || b};
+var drawOffMarketTick = function(a, b, c) {return a || b || c};
 
 var bullMarketToday = false;
 var bearMarketToday = false;
@@ -57,8 +55,12 @@ function marketTick(drawOnTick = true) {
   if (drawOnTick) {
     drawOnMarketTick(stocks, portfolio, account, time);
   } else {
-    renderMarektTick(stocks, portfolio, account);
+    saveMarketTick(stocks, portfolio, account, time);
   }
+}
+
+function broadcastState() {
+  drawOffMarketTick(stocks, portfolio, account);
 }
 
 function openMarket() {
