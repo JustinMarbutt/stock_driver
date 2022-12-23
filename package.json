@@ -6,7 +6,7 @@
   "scripts": {
     "setup-bin": "cd bin && npm install",
     "build-sass": "node-sass assets/styles/ -o bin/assets/styles/",
-    "build-js": "uglifyjs assets/js/index.js -c -m -o bin/assets/js/index.js && uglifyjs-folder assets/js/library -c -m -o bin/assets/js/library.js && uglifyjs-folder assets/js/scripts -c -m -o bin/assets/js/script.js",
+    "build-js": "babel assets/js/index.js --out-file bin/assets/js/index.js && babel assets/js/library --out-file bin/assets/js/library.js && babel assets/js/scripts --out-file bin/assets/js/script.js",
     "build": "npm run build-js && npm run build-sass",
     "setup": "npm install && npm run setup-bin",
     "build-dev": "npm run build && open bin/index.html"
@@ -22,8 +22,9 @@
   },
   "homepage": "https://github.com/JustinMarbutt/stock_driver#readme",
   "devDependencies": {
-    "node-sass": "8.0.0",
-    "uglify-js": "3.17.4",
-    "uglifyjs-folder": "3.1.4"
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "node-sass": "8.0.0"
   }
 }
