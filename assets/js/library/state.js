@@ -77,7 +77,7 @@ function openMarket() {
   time.set('minute', 30);
   if (time.format('dddd') === 'Friday') {
     time.add(2, 'days');
-    setTendsForWeek();
+    setTrendsForWeek();
   }
   time.add(1, 'days');
   var rand = Math.random();

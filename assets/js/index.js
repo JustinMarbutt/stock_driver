@@ -40,7 +40,7 @@ function initNewGame() {
   $('#buy-action-num-shares').val(10);
 
   // set the trends for the first week
-  setTendsForWeek();
+  setTrendsForWeek();
 
   // draw the market and portfolio
   drawMarketView(stocks, '#stock-market-table');

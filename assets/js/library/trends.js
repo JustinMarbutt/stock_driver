@@ -165,7 +165,7 @@ var trendFuncs = [
   buyIntoClose,
 ]
 
-function setTendsForWeek() {
+function setTrendsForWeek() {
   trends = {};
   for(var i = 0; i < 7; i++) {
     trends[i] = {
