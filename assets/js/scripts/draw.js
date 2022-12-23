@@ -290,7 +290,7 @@ function drawClosedMarketView() {
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
 }
 
-function drawOnMarketTick(stocks) {
+function drawOnMarketTick(stocks, account) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio();
   drawCurrentTime(time);
@@ -299,7 +299,7 @@ function drawOnMarketTick(stocks) {
   $('#is-loading').hide();
 }
 
-function renderMarektTick(stocks) {
+function renderMarektTick(stocks, account) {
   addChartData(accountChart, time.format('h:mm a'), account.cash + account.portfolio, false);
   addChartData(dailyChart, time.format('h:mm a'), stocks[selectedStockIndex].price, false);
 }

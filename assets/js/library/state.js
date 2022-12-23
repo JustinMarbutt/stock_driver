@@ -55,9 +55,9 @@ function marketTick(drawOnTick = true) {
   account.portfolio = stockTotalValue;
 
   if (drawOnTick) {
-    drawOnMarketTick(stocks);
+    drawOnMarketTick(stocks, account);
   } else {
-    renderMarektTick(stocks);
+    renderMarektTick(stocks, account);
   }
 }
 
