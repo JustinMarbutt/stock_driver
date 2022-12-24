@@ -346,3 +346,8 @@ function removeStockFromPortfolioView(id) {
 function drawSeedValue(seed) {
   $('#seed-result').text(seed);
 }
+
+function drawFirstGameState() {
+  $('#stock-market-table').find('tr').first().trigger('click');
+  $('#buy-action-num-shares').val(10);
+}

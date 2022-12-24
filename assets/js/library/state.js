@@ -78,8 +78,7 @@ function initNewGame() {
   drawPortfolio(stocks, portfolio, account);
 
   // select the first stock to trade by default
-  $('#stock-market-table').find('tr').first().trigger('click');
-  $('#buy-action-num-shares').val(10);
+  drawFirstGameState();
 }
 
 function marketTick(drawOnTick = true) {
