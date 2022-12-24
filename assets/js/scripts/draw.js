@@ -347,10 +347,6 @@ function removeStockFromPortfolioView(id) {
   $('#lot-row-' + id).remove();
 }
 
-function drawSeedValue(seed) {
-  $('#seed-result').text(seed);
-}
-
 function drawFirstGameState(stocks, portfolio, account, time) {
   $('#stock-market-table').find('tr').first().trigger('click');
   $('#buy-action-num-shares').val(10);

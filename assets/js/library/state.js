@@ -15,12 +15,6 @@ const STATE_INTERVAL_IN_MS = 1000;
 const CHANCE_OF_BULL_MARKET = 0.08;
 const CHANCE_OF_BEAR_MARKET = 0.04;
 
-// var drawOnMarketTick = function(a, b, c, d) {return a || b || c || d};
-// var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
-// var saveMarketTick = function(a, b) {return a || b};
-// var drawClosedMarketView = function(a, b, c) {return a || b || c};
-// var drawFirstGameState = function() {return};
-
 var stocks = [];
 var tickerHash = {};
 var portfolio = {};
