@@ -88,8 +88,6 @@ function createFakeMarket() {
   var seed = getRandomArbitrary(0, 1000);
   var rng = defineSeededRandom(seed);
 
-  drawSeedValue(seed);
-
   return {
     createStock: function(min, max) {
       var company = makeCompany(rng, min, max);

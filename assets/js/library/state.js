@@ -9,6 +9,14 @@ var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
 var saveMarketTick = function(a, b) {return a || b};
 var drawClosedMarket = function(a, b, c) {return a || b || c};
 
+var stocks = [];
+var portfolio = {};
+var account = {
+  cash: 24500.00,
+  margin: 0.00,
+  portfolio: 0.00,
+}
+var trends = {};
 var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 
 var bullMarketToday = false;
@@ -21,6 +29,58 @@ var addedTime = 0;
 var marketOpen = false;
 var marketPaused = false;
 var gameState;
+
+var fakeMarket = createFakeMarket();
+
+// Default funciton for creating a new game
+function initNewGame() {
+  var stockIndex = 0;
+  // create 3 unique teir 0 stocks with high prices and low vol
+  for (var i = 0; i < 3; i++) {
+    var newStock = fakeMarket.createStock(50, 420);
+    newStock['tier'] = 0;
+    stocks.push(newStock);
+    tickerHash[newStock.ticker] = stockIndex;
+    stockIndex++;
+  }
+
+  // create 3 unique tier 1 stocks with medium prices and vol
+  for (var i = 0; i < 3; i++) {
+    var newStock = fakeMarket.createStock(12, 75);
+    newStock['tier'] = 1;
+    stocks.push(newStock);
+    tickerHash[newStock.ticker] = stockIndex;
+    stockIndex++;
+  }
+
+  // create 3 unique tier 2 stocks with low price and high vol
+  for (var i = 0; i < 3; i++) {
+    var newStock = fakeMarket.createStock(0, 10);
+    newStock['tier'] = 2;
+    stocks.push(newStock);
+    tickerHash[newStock.ticker] = stockIndex;
+    stockIndex++;
+  }
+
+  // set beggining game time display and default buy order to 10 shares
+  time.set('hour', 9);
+  time.set('minute', 30);
+  time.set('month', 3);
+  time.set('day', 9);
+  time.set('year', 1987);
+  drawCurrentTime(time);
+
+  // set the trends for the first week
+  trends = setTrendsForWeek();
+
+  // draw the market and portfolio
+  drawMarketView(stocks, '#stock-market-table');
+  drawPortfolio(stocks, portfolio, account);
+
+  // select the first stock to trade by default
+  $('#stock-market-table').find('tr').first().trigger('click');
+  $('#buy-action-num-shares').val(10);
+}
 
 function marketTick(drawOnTick = true) {
   gameTime++;
