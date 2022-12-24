@@ -8,6 +8,7 @@ var drawOnTick = function(a, b, c, d) {return a || b || c || d};
 var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
 var saveMarketTick = function(a, b) {return a || b};
 var drawClosedMarket = function(a, b, c) {return a || b || c};
+var drawFirstGameState = function() {return};
 
 var stocks = [];
 var portfolio = {};
