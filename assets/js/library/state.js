@@ -86,7 +86,7 @@ function initNewGame() {
   trends = setTrendsForWeek();
 
   // select the first stock to trade by default
-  drawFirstGameState();
+  drawFirstGameState(stocks, portfolio, account, time);
 }
 
 function marketTick(drawOnTick = true) {

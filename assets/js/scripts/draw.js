@@ -351,9 +351,10 @@ function drawSeedValue(seed) {
   $('#seed-result').text(seed);
 }
 
-function drawFirstGameState() {
+function drawFirstGameState(stocks, portfolio, account, time) {
   $('#stock-market-table').find('tr').first().trigger('click');
   $('#buy-action-num-shares').val(10);
+  drawOnMarketTick(stocks, portfolio, account, time);
 }
 
 function setSelectedStockIndex(i) {
