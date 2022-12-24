@@ -1,5 +1,9 @@
 // Draw and toggle functions
+import formatter from '../library/formatter';
+import { getStockIndex, broadcastState } from '../library/state';
+import { onClickSellStock, onClickStockToTrade } from './actions';
 
+var selectedStockIndex = 0;
 // Init Charts
 var accountChartData = {
   labels: ['9:30 AM'],
@@ -221,7 +225,7 @@ function drawMarketView(stocks, id) {
 }
 
 function drawPositionTradeView(stocks, position) {
-  var stock = stocks[tickerHash[position.stockId]];
+  var stock = stocks[getStockIndex(position.stockId)];
   var $selectedStockPosition = $('#selected-stock-position');
   var $sellButton = $selectedStockPosition.find('.sell-stock-action');
   // re-draw position info
@@ -253,9 +257,9 @@ function drawPortfolio(stocks, portfolio, account) {
       drawPositionTradeView(stocks, value);
     }
     if ($('#lot-row-' + key).length > 0) {
-      updateLot(value, key, stocks[tickerHash[value.stockId]]);
+      updateLot(value, key, stocks[getStockIndex(value.stockId)]);
     } else {
-      $tableBody.append(drawLot(value, key, stocks[tickerHash[value.stockId]]));
+      $tableBody.append(drawLot(value, key, stocks[getStockIndex(value.stockId)]));
     }
   };
   $('#cash-value').text(formatter.format(account.cash));
@@ -278,7 +282,7 @@ function drawSelectedStock(stockTicker, selectedStockRow) {
 function drawClosedMarketView(stocks, portfolio, account) {
   drawMarketView(stocks, '#stock-market-table');
   drawPortfolio(stocks, portfolio, account);
-  ringTheBell();
+  // ringTheBell();
 
   toggleClosedMarketView();
   flashMessage('#flash-messages', 'Markets Closed', 'danger');
@@ -331,7 +335,7 @@ function toggleOpenMarketView() {
   $('#pause-market').show();
   $('#close-market').show();
   $('.resume-market').show();
-  ringTheBell();
+  // ringTheBell();
 }
 
 function toggleResumedMarketView() {
@@ -350,4 +354,24 @@ function drawSeedValue(seed) {
 function drawFirstGameState() {
   $('#stock-market-table').find('tr').first().trigger('click');
   $('#buy-action-num-shares').val(10);
+}
+
+function setSelectedStockIndex(i) {
+  selectedStockIndex = i;
+}
+
+export {
+  removeStockFromPortfolioView,
+  drawSelectedStock,
+  drawOnMarketTick,
+  drawOffMarketTick,
+  saveMarketTick,
+  drawClosedMarketView,
+  drawFirstGameState,
+  togglePausedMarketView,
+  toggleOpenMarketView,
+  toggleResumedMarketView,
+  toggleTradeView,
+  setSelectedStockIndex,
+  flashMessage
 }

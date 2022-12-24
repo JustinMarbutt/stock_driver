@@ -1,4 +1,5 @@
 // Data generators for company names and stock prices
+import formatter from './formatter';
 
 var firstWords = [
   'Averley',
@@ -84,6 +85,28 @@ function makeCompany(rng, min, max) {
   }
 }
 
+function defineSeededRandom(a) {
+	
+  // the initial seed
+  Math.seed = a;
+  
+  // in order to work 'Math.seed' must NOT be undefined,
+  // so in any case, you HAVE to provide a Math.seed
+  return function(max, min) {
+      max = max || 1;
+      min = min || 0;
+  
+      Math.seed = (Math.seed * 9301 + 49297) % 233280;
+      var rnd = Math.seed / 233280;
+  
+      return min + rnd * (max - min);
+  }
+}
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function createFakeMarket() {
   var seed = getRandomArbitrary(0, 1000);
   var rng = defineSeededRandom(seed);
@@ -95,3 +118,5 @@ function createFakeMarket() {
     }
   };
 }
+
+export default createFakeMarket

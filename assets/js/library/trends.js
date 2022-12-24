@@ -6,6 +6,10 @@ const MIN_TICK_CHANGE = .00005;
 const MAX_TICK_CHANGE = .00027;
 const CHANCE_OF_NO_CHANGE = .125;
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function basicTick(price, chanceOfNoChange, minGainChance, maxGainChance, minTickChange, maxTickChange) {
   var rand = Math.random();
   if (rand < chanceOfNoChange) {
@@ -175,3 +179,5 @@ function setTrendsForWeek() {
   }
   return randTrends;
 }
+
+export { setTrendsForWeek, noTrend, upTrendSimple, downTrendSimple }

@@ -1,2 +1,8 @@
 // Hello, Fake Market!
-$(document).ready(initNewGame);
+import { initNewGame } from "./library/state";
+import { registerActions } from "./scripts/actions";
+
+$(document).ready(function() {
+  initNewGame();
+  registerActions();
+});
