@@ -180,4 +180,9 @@ function setTrendsForWeek() {
   return randTrends;
 }
 
-export { setTrendsForWeek, noTrend, upTrendSimple, downTrendSimple }
+export {
+  setTrendsForWeek,
+  noTrend,
+  upTrendSimple,
+  downTrendSimple
+}

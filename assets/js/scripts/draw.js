@@ -1,7 +1,13 @@
 // Draw and toggle functions
 import formatter from '../library/formatter';
-import { getStockIndex, broadcastState } from '../library/state';
-import { onClickSellStock, onClickStockToTrade } from './actions';
+import {
+  getStockIndex,
+  broadcastState
+} from '../library/state';
+import {
+  onClickSellStock,
+  onClickStockToTrade
+} from './actions';
 
 var selectedStockIndex = 0;
 // Init Charts
@@ -348,9 +354,9 @@ function removeStockFromPortfolioView(id) {
 }
 
 function drawFirstGameState(stocks, portfolio, account, time) {
+  drawOnMarketTick(stocks, portfolio, account, time);
   $('#stock-market-table').find('tr').first().trigger('click');
   $('#buy-action-num-shares').val(10);
-  drawOnMarketTick(stocks, portfolio, account, time);
 }
 
 function setSelectedStockIndex(i) {

@@ -1,7 +1,12 @@
 // State machine
 import createFakeMarket from './data-generators';
-import { setTrendsForWeek, noTrend, upTrendSimple, downTrendSimple } from './trends';
 import formatter from './formatter';
+import {
+  setTrendsForWeek,
+  noTrend,
+  upTrendSimple,
+  downTrendSimple
+} from './trends';
 import {
   drawOnMarketTick,
   drawOffMarketTick,
@@ -29,12 +34,13 @@ var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var bullMarketToday = false;
 var bearMarketToday = false;
 
+var marketOpen = false;
+var marketPaused = false;
+
 var time = moment();
 var gameTime = 0;
 var gameDays = 0;
 var addedTime = 0;
-var marketOpen = false;
-var marketPaused = false;
 var gameState;
 
 var fakeMarket = createFakeMarket();
