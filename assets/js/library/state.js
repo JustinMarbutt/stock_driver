@@ -205,9 +205,10 @@ function skipToMarketClose() {
   resumeMarket(-800);
 }
 
-function resumeMarket(addedTime) {
+function resumeMarket(t) {
   clearInterval(gameState);
   //setting the loop with time interval
+  addedTime = t;
   gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS + addedTime);
   marketPaused = false;
 }
@@ -277,10 +278,6 @@ function isMarketPaused() {
   return marketPaused;
 }
 
-function setAddedTime(t) {
-  addedTime = t;
-}
-
 export { 
   initNewGame,
   getStockIndex,
@@ -293,6 +290,5 @@ export {
   pauseMarket,
   resumeMarket,
   skipToMarketClose,
-  setAddedTime,
   broadcastState
 }

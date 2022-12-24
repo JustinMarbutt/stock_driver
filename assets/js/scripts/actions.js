@@ -7,8 +7,7 @@ import {
   skipToMarketClose,
   openMarket,
   pauseMarket,
-  resumeMarket,
-  setAddedTime
+  resumeMarket
 } from "../library/state";
 import {
   removeStockFromPortfolioView,
@@ -103,7 +102,6 @@ function onClickOpenMarket() {
 
 function onClickResumeMarket() {
   var t = $(this).data('ms');
-  setAddedTime(t);
   resumeMarket(t);
   toggleResumedMarketView();
 }
@@ -117,4 +115,8 @@ function registerActions() {
   $('.toggle-trade-view').on('click', onClickToggleTradeView);
 }
 
-export { registerActions, onClickSellStock, onClickStockToTrade }
+export {
+  registerActions,
+  onClickSellStock,
+  onClickStockToTrade
+}
