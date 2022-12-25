@@ -1,16 +1,27 @@
 // State machine
+import createFakeMarket from './data-generators';
+import formatter from './formatter';
+import {
+  setTrendsForWeek,
+  noTrend,
+  upTrendSimple,
+  downTrendSimple
+} from './trends';
+import {
+  drawOnMarketTick,
+  drawOffMarketTick,
+  saveMarketTick,
+  drawClosedMarketView,
+  drawFirstGameState
+} from '../scripts/draw';
+
 const LENGTH_OF_TRADING_DAY_INTERVALS = 389;
 const STATE_INTERVAL_IN_MS = 1000;
 const CHANCE_OF_BULL_MARKET = 0.08;
 const CHANCE_OF_BEAR_MARKET = 0.04;
 
-var drawOnTick = function(a, b, c, d) {return a || b || c || d};
-var drawOffMarketTick = function(a, b, c, d) {return a || b || c|| d};
-var saveMarketTick = function(a, b) {return a || b};
-var drawClosedMarket = function(a, b, c) {return a || b || c};
-var drawFirstGameState = function() {return};
-
 var stocks = [];
+var tickerHash = {};
 var portfolio = {};
 var account = {
   cash: 24500.00,
@@ -23,12 +34,13 @@ var stockDailyValues = [[],[],[],[],[],[],[],[],[]];
 var bullMarketToday = false;
 var bearMarketToday = false;
 
+var marketOpen = false;
+var marketPaused = false;
+
 var time = moment();
 var gameTime = 0;
 var gameDays = 0;
 var addedTime = 0;
-var marketOpen = false;
-var marketPaused = false;
 var gameState;
 
 var fakeMarket = createFakeMarket();
@@ -69,17 +81,12 @@ function initNewGame() {
   time.set('month', 3);
   time.set('day', 9);
   time.set('year', 1987);
-  drawCurrentTime(time);
 
   // set the trends for the first week
   trends = setTrendsForWeek();
 
-  // draw the market and portfolio
-  drawMarketView(stocks, '#stock-market-table');
-  drawPortfolio(stocks, portfolio, account);
-
   // select the first stock to trade by default
-  drawFirstGameState();
+  drawFirstGameState(stocks, portfolio, account, time);
 }
 
 function marketTick(drawOnTick = true) {
@@ -198,9 +205,10 @@ function skipToMarketClose() {
   resumeMarket(-800);
 }
 
-function resumeMarket(addedTime) {
+function resumeMarket(t) {
   clearInterval(gameState);
   //setting the loop with time interval
+  addedTime = t;
   gameState = setInterval(marketTick, STATE_INTERVAL_IN_MS + addedTime);
   marketPaused = false;
 }
@@ -256,4 +264,31 @@ function buyStock(ticker, numberOfShares) {
 
   // order accepted
   return true;
+}
+
+function getStockIndex(ticker) {
+  return tickerHash[ticker];
+}
+
+function isMarketOpen() {
+  return marketOpen;
+}
+
+function isMarketPaused() {
+  return marketPaused;
+}
+
+export { 
+  initNewGame,
+  getStockIndex,
+  isMarketOpen,
+  isMarketPaused,
+  sellStock,
+  buyStock,
+  openMarket,
+  closeMarket,
+  pauseMarket,
+  resumeMarket,
+  skipToMarketClose,
+  broadcastState
 }

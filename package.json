@@ -1,12 +1,12 @@
 {
   "name": "stock_driver",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "a fake market trading game",
   "main": "bin/index.html",
   "scripts": {
     "setup-bin": "cd bin && npm install",
     "build-sass": "node-sass assets/styles/ -o bin/assets/styles/",
-    "build-js": "babel assets/js/index.js --out-file bin/assets/js/index.js && babel assets/js/library --out-file bin/assets/js/library.js && babel assets/js/scripts --out-file bin/assets/js/script.js",
+    "build-js": "webpack",
     "build": "npm run build-js && npm run build-sass",
     "setup": "npm install && npm run setup-bin",
     "build-dev": "npm run build && open bin/index.html"
@@ -22,9 +22,8 @@
   },
   "homepage": "https://github.com/JustinMarbutt/stock_driver#readme",
   "devDependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.7",
-    "@babel/preset-env": "^7.20.2",
-    "node-sass": "8.0.0"
+    "node-sass": "8.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

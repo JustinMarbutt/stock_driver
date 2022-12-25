@@ -1,9 +1,29 @@
 // Binding functions to dom
+import {
+  isMarketOpen,
+  isMarketPaused,
+  sellStock,
+  buyStock,
+  skipToMarketClose,
+  openMarket,
+  pauseMarket,
+  resumeMarket
+} from "../library/state";
+import {
+  removeStockFromPortfolioView,
+  drawSelectedStock,
+  togglePausedMarketView,
+  toggleOpenMarketView,
+  toggleResumedMarketView,
+  toggleTradeView,
+  setSelectedStockIndex,
+  flashMessage
+} from "./draw";
 
 function onClickBuyStock() {
-  if (!marketOpen) {
+  if (!isMarketOpen()) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
-  } else if (marketPaused) {
+  } else if (isMarketPaused()) {
     return flashMessage('#flash-messages', 'Market Paused!', 'warning');
   }
 
@@ -16,19 +36,19 @@ function onClickBuyStock() {
   // to prevent more than one order per tick
   // $('#is-loading').hide();
   if (orderRes) {
-    playSuccessSound();
+    // playSuccessSound();
     flashMessage('#flash-messages', 'Order Accepted!', 'success');
   } else {
     $('#is-loading').hide();
-    playRejectSound();
+    // playRejectSound();
     return flashMessage('#flash-messages', 'Order Rejected!', 'danger');
   }
 }
 
 function onClickSellStock() {
-  if (!marketOpen) {
+  if (!isMarketOpen()) {
     return flashMessage('#flash-messages', 'Market Closed!', 'warning');
-  } else if (marketPaused) {
+  } else if (isMarketPaused()) {
     return flashMessage('#flash-messages', 'Market Paused!', 'warning');
   }
 
@@ -43,10 +63,10 @@ function onClickSellStock() {
   // $('#is-loading').hide();
   if (orderRes) {
     removeStockFromPortfolioView(id);
-    playSuccessSound();
+    // playSuccessSound();
     flashMessage('#flash-messages', 'Order Accepted!', 'success');
   } else {
-    playRejectSound();
+    // playRejectSound();
     flashMessage('#flash-messages', 'Order Rejected!', 'danger');
   }
 }
@@ -56,7 +76,7 @@ function onClickStockToTrade() {
   var selectedStockRow = this;
   var selectedIndex = parseInt($(this).data('row-index'));
   // set global var for state machine refrence
-  selectedStockIndex = selectedIndex;
+  setSelectedStockIndex(selectedIndex);
   drawSelectedStock(stockTicker, selectedStockRow);
 }
 
@@ -81,14 +101,22 @@ function onClickOpenMarket() {
 }
 
 function onClickResumeMarket() {
-  addedTime = $(this).data('ms');
-  resumeMarket(addedTime);
+  var t = $(this).data('ms');
+  resumeMarket(t);
   toggleResumedMarketView();
 }
 
-$('#buy-stock-action').on('click', onClickBuyStock);
-$('#open-market').on('click', onClickOpenMarket);
-$('#close-market').on('click', onClickCloseMarket);
-$('#pause-market').on('click', onClickPauseMarket);
-$('.resume-market').on('click', onClickResumeMarket);
-$('.toggle-trade-view').on('click', onClickToggleTradeView);
+function registerActions() {
+  $('#buy-stock-action').on('click', onClickBuyStock);
+  $('#open-market').on('click', onClickOpenMarket);
+  $('#close-market').on('click', onClickCloseMarket);
+  $('#pause-market').on('click', onClickPauseMarket);
+  $('.resume-market').on('click', onClickResumeMarket);
+  $('.toggle-trade-view').on('click', onClickToggleTradeView);
+}
+
+export {
+  registerActions,
+  onClickSellStock,
+  onClickStockToTrade
+}

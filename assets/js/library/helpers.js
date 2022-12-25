@@ -1,32 +1,3 @@
-// Helper functions
-
-function getRandomArbitrary(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function defineSeededRandom(a) {
-	
-  // the initial seed
-  Math.seed = a;
-  
-  // in order to work 'Math.seed' must NOT be undefined,
-  // so in any case, you HAVE to provide a Math.seed
-  return function(max, min) {
-      max = max || 1;
-      min = min || 0;
-  
-      Math.seed = (Math.seed * 9301 + 49297) % 233280;
-      var rnd = Math.seed / 233280;
-  
-      return min + rnd * (max - min);
-  }
-}
-
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-
 // Sound Helpers
 var closingBell = new Audio('assets/audio/closing_bell.wav');
 var closingBell2 = new Audio('assets/audio/closing_bell.wav');
