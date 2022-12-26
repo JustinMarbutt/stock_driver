@@ -7,4 +7,10 @@ module.exports = {
         path: path.resolve(__dirname, 'bin/assets/js'),
         filename: 'bundle.js',
     },
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader'],
+        }]
+    }
 }
