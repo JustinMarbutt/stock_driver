@@ -1,4 +1,5 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -12,5 +13,12 @@ module.exports = {
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader'],
         }]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Fake Market',
+            filename: path.resolve(__dirname, 'bin/index.html'),
+            template: path.resolve(__dirname, 'assets/template.html')
+        })
+    ]
 }
