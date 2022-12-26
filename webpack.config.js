@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, 'assets/js/index.js'),
+    entry: path.resolve(__dirname, 'app/js/index.js'),
     output: {
         path: path.resolve(__dirname, 'bin/'),
         filename: 'bundle.js',
@@ -18,7 +18,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Fake Market',
             filename: path.resolve(__dirname, 'bin/index.html'),
-            template: path.resolve(__dirname, 'assets/template.html')
+            template: path.resolve(__dirname, 'app/template.html')
         })
     ]
 }
