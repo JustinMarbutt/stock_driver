@@ -1,6 +1,5 @@
 .DS_Store
 **/.DS_Store
 node_modules
-bin/node_modules
-bin/index.html
-bin/bundle.js
+bin
+bin/*

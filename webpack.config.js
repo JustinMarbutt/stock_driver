@@ -1,5 +1,6 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+var webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -12,13 +13,21 @@ module.exports = {
         rules: [{
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader'],
-        }]
+        },{
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+          }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Fake Market',
             filename: path.resolve(__dirname, 'bin/index.html'),
             template: path.resolve(__dirname, 'app/template.html')
-        })
+        }),
+        new webpack.ProvidePlugin({
+            $: require.resolve('jquery'),
+            jQuery: require.resolve('jquery')
+        }),
     ]
 }
