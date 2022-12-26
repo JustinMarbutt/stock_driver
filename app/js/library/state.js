@@ -1,4 +1,5 @@
 // State machine
+import * as moment from 'moment';
 import createFakeMarket from './data-generators';
 import formatter from './formatter';
 import {
