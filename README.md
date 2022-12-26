@@ -10,8 +10,8 @@ An engine and interface for a fake market trading game.
 
 `npm run build`
 
-## Run
+## Run dev server
 
-`open /bin/index.html`
+`npm run dev`
 
 © 2022 Justin Marbutt

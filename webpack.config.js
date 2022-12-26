@@ -8,7 +8,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'bin/'),
         filename: 'bundle.js',
+        clean: true
     },
+    devtool: 'source-map',
     module: {
         rules: [{
             test: /\.scss$/,

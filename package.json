@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "setup": "npm install",
-    "build-dev": "npm run build && open bin/index.html"
+    "dev": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
