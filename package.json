@@ -4,9 +4,8 @@
   "description": "a fake market trading game",
   "main": "bin/index.html",
   "scripts": {
-    "setup-bin": "cd bin && npm install",
     "build": "webpack",
-    "setup": "npm install && npm run setup-bin",
+    "setup": "npm install",
     "build-dev": "npm run build && open bin/index.html"
   },
   "repository": {
