@@ -1,4 +1,5 @@
 // Draw and toggle functions
+import Chart from 'chart.js/auto';
 import formatter from '../library/formatter';
 import {
   getStockIndex,
