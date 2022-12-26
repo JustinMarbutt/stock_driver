@@ -12,13 +12,20 @@ module.exports = {
     },
     devtool: 'source-map',
     module: {
-        rules: [{
-            test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'sass-loader'],
-        },{
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-          }
+        rules: [
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },{
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }, {
+                test: /\.js$/,
+                exclude: '/node_modules',
+                use: {
+                    loader: 'babel-loader'
+                }
+            }
         ]
     },
     plugins: [
