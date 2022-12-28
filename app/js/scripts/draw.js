@@ -171,8 +171,8 @@ function drawTicker(stock, index) {
   return html;
 }
 
-function updateTicker(stock, $table) {
-  var $row = $table.find('#stock-row-' + stock.ticker);
+function updateTicker(stock) {
+  var $row = $('#stock-row-' + stock.ticker);
   $row.find('.stock-price').text(stock.displayPrice());
   $row.find('.stock-percent-change').html(drawPercentageChange(stock.price, stock.open));
 }
@@ -220,7 +220,7 @@ function drawMarketView(stocks, id) {
   var $tableBody = $(id);
   if ($tableBody.data('drawn')) {
     return stocks.forEach(function(stock){
-      updateTicker(stock, $tableBody);
+      updateTicker(stock);
     });
   }
   $tableBody.html('');
