@@ -30,7 +30,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Fake Market',
+            title: 'Justin Marbutt\'s Fake Market',
             filename: path.resolve(__dirname, 'bin/index.html'),
             template: path.resolve(__dirname, 'app/template.html'),
             favicon: path.resolve(__dirname, 'app/assets/favicon.ico')
