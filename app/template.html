@@ -149,5 +149,37 @@
         </div>
       </main>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="false">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-dark" id="termsModalLabel">Disclaimer</h5>
+          </div>
+          <form>
+            <div class="modal-body">
+              <p class="text-dark">
+                <strong>This is a game, this is not a real account.</strong>
+                All information provided, including but not limited to company names, prices, and performance, 
+                is purely fictitious and bears no resemblance to any real-world counterparts. Any similarities are purely coincidental. 
+                <br><br><strong>The performance of players in this game should not be taken as indicative of real-life stock trading performance.</strong>
+                <br><br>This game is for entertainment purposes only and should not be relied upon for financial advice or investment decisions. 
+                <br><br>By participating in this game, you acknowledge and agree that any investment decisions made by you are made at your own 
+                risk and that you are solely responsible for any such decisions and their consequences.
+                <br><br><strong>The developers and creators of this game shall not be held liable for any losses or damages incurred as a result of your participation in the game</strong>
+              </p>
+              <div class="text-right fs-2">
+                <input type="checkbox"  onchange="document.getElementById('agreeButton').disabled = !this.checked;" />
+                <label class="text-dark">I, Agreee</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="https://www.google.com" role="button" class="btn btn-danger">Close Game</a>
+              <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal" disabled>Play Game</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
