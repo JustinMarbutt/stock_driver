@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Justin Marbutt's Fake Market</title>
+  <link rel="icon" href="favicon.ico"><script defer src="bundle.js"></script></head>
+  <body class="bg-dark">
+    <div id="is-loading" style="display:none;">
+      <div class="spinner-border text-info" role="status">
+      </div>
+    </div>
+    <div id="flash-messages">
+    </div>
+    <div class="cover-container d-flex w-100 h-100 p-3 flex-column">
+      <main role="main" class="inner cover">
+        <div class="row">
+          <div class="col-sm-12" style="display:none;"><h3>Seed: <span id="seed-result"></span></h3></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-xl-5">
+            <div class="mb-2 d-flex justify-content-between">
+              <div>
+                <button type="button" class="btn btn-success" id="open-market" style="float:left;">
+                  Open Market
+                </button>
+                <button type="button" class="btn text-white btn-warning" id="pause-market" style="display:none;">
+                  <i class="bi bi-pause-fill"></i>
+                </button>
+                <button type="button" class="btn btn-primary resume-market" data-ms="0" style="display:none;">
+                  <i class="bi bi-play-fill"></i>
+                </button>
+                <button type="button" class="btn btn-primary resume-market" data-ms="-800" style="display:none;">
+                  <i class="bi bi-fast-forward-fill"></i>
+                </button>
+                <button type="button" class="btn btn-danger" id="close-market" style="display:none;">
+                  <i class="bi bi-skip-forward-fill"></i>
+                </button>
+              </div>
+              <h4><span id="time-display"></span></h4>
+            </div>
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Ticker</th>
+                  <th scope="col" class="text-right">Current Price</th>
+                  <th scope="col" class="text-right">Change</th>
+                  <!-- <th scope="col" class="text-right">Open Price</th>
+                  <th scope="col" class="text-right">Close Price</th> -->
+                </tr>
+              </thead>
+              <tbody id="stock-market-table">
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-12 col-xl-7">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="mb-2 d-flex justify-content-between">
+                  <div>
+                    <button type="button" data-target="#portfolio-view" class="toggle-trade-view btn btn-primary mx-1" style="float:left;">
+                      <i class="bi bi-card-list"></i>
+                    </button>
+                    <button type="button" data-target="#trading-view" class="toggle-trade-view btn btn-primary mx-1" style="float:left;">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </button>
+                    <button type="button" data-target="#chart-view" class="toggle-trade-view btn btn-primary mx-1" style="float:left;">
+                      <i class="bi bi-graph-up"></i>
+                    </button>
+                  </div>
+                  <div class="d-flex">
+                    <h4 style="display:none;">Margin: <span id="margin-value"></span>&nbsp;&nbsp;&nbsp;</h4>
+                    <h4>Cash: <span id="cash-value"></span>&nbsp;&nbsp;&nbsp;</h4>
+                    <h4>Portfolio: <span id="stock-value"></span>&nbsp;&nbsp;&nbsp;</h4>
+                    <h4>Total: <span id="total-value"></span></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="toggle-trade-view-item" id="chart-view" style="display:none;">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="account-chart-wrapper">
+                    <canvas id="account-chart" height="400"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="toggle-trade-view-item" id="portfolio-view" style="display:none;">
+              <table class="table table-dark table-hover user-view">
+                <thead>
+                  <tr>
+                    <th scope="col">Ticker</th>
+                    <th scope="col" class="text-right">Current Price</th>
+                    <th scope="col" class="text-right">Purchase Price</th>
+                    <th scope="col" class="text-right">Profit/Loss</th>
+                    <th scope="col" class="text-right">Number of Shares</th>
+                    <th scope="col" class="text-right">Market Value</th>
+                    <th scope="col" class="text-right">Trade</th>
+                  </tr>
+                </thead>
+                <tbody id="portfolio-table">
+                </tbody>
+              </table>
+            </div>
+            <div class="row user-view toggle-trade-view-item" id="trading-view">
+              <div class="form-group col-sm-12 col-md-6 col-lg-8">
+                <canvas id="daily-chart" height="400"></canvas>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-4">
+                <h4 class="mt-1">Enter Trade</h4>
+                <form>
+                  <label class="form-label mb-1">Buying ticker: <span class="buy-action-display"></span></label>
+                  <div class="form-group" style="display:none;">
+                    <label class="col-form-label mt-1" for="buy-action-num-shares">Ticker</label>
+                    <input type="text" class="form-control disabled" id="buy-action-ticker" placeholder="Stock Ticker" disabled>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label mt-1" for="buy-action-num-shares">Number of Shares</label>
+                    <input type="number"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                      min="0" max="99999" value="100" class="form-control" placeholder="Number of Shares" id="buy-action-num-shares">
+                    <button class="btn btn-primary mt-2" type="button" id="buy-stock-action">Buy Lot</button>
+                  </div>
+                  <!-- <div class="form-group" style="display:none;">
+                    <label class="form-label mb-1">Sell Short</label>
+                    <div class="form-group">
+                      <label class="col-form-label mt-1" for="sell-action-num-shares">Number of Shares</label>
+                      <input type="number"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');"
+                        min="0" max="99999" class="form-control" placeholder="Number of Shares" id="sell-action-num-shares">
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label mt-1" for="sell-action-num-shares">Ticker</label>
+                      <input type="text" class="form-control" id="sell-action-ticker" placeholder="Stock Ticker" disabled>
+                    </div>
+                    <button class="btn btn-primary mt-2" type="button" id="sell-stock-action" style="float:right;">Sell Lot Short</button>
+                  </div> -->
+                </form>
+                <div id="selected-stock-position" style="display:none;">
+                  <div class="current-position-info-display"></div>
+                  <button type="button" class="btn btn-primary sell-stock-action">Sell</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="false">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-dark" id="termsModalLabel">Disclaimer</h5>
+          </div>
+          <form>
+            <div class="modal-body">
+              <p class="text-dark">
+                All information provided, including but not limited to company names, prices, and performance, 
+                is purely fictitious and bears no resemblance to any real-world counterparts. Any similarities are purely coincidental. 
+                <br><br><strong>The performance of players in this game should not be taken as indicative of real-life stock trading performance.</strong>
+                <br><br>This game is for entertainment purposes only and should not be relied upon for financial advice or investment decisions. 
+                <br><br>By participating in this game, you acknowledge and agree that any investment decisions made by you are made at your own 
+                risk and that you are solely responsible for any such decisions and their consequences.
+                <br><br><strong>The developers and creators of this game shall not be held liable for any losses or damages incurred as a result of your participation in the game</strong>
+              </p>
+              <div class="text-right fs-2">
+                <input type="checkbox" onchange="document.getElementById('agreeButton').disabled = !this.checked;" />
+                <label class="text-dark"><strong>I, Agreee</strong></label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a href="https://www.google.com" role="button" class="btn btn-danger">Close Game</a>
+              <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal" disabled>Play Game</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
